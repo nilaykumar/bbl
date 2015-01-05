@@ -1,0 +1,197 @@
+% This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+% To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
+
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[mathscr]{euscript}
+\usepackage[colorlinks]{hyperref}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage{todonotes}
+\usepackage{tikz-cd}
+
+%\usepackage[style=authoryear]{biblatex}
+%\addbibresource{references.bib}
+
+\newcommand{\catname}[1]{\normalfont\textbf{#1}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fr}{\mathfrak}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\sHom}{\mathscr{H}\!om}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\ad}{ad}
+
+\begin{document}
+
+\title{Beilinson-Bernstein Localization [DRAFT]}
+\author{Matei Ionita and Nilay Kumar}
+\date{Last updated: \today}
+
+\maketitle
+
+\subsection{Preliminaries}
+
+Fix $X$ a smooth complex algebraic variety. We provide a coordinate-independent definition
+of certain sheaves of differential operators.
+
+\begin{definition}
+    Let $R$ be a commutative $\C$-algebra, and $M,N$ be $R$-modules.
+    We define the module of $\C$-derivations $\Diff_R(M,N)$ to be the submodule
+    of homomorphisms $d\in\Hom_\C(M,N)$ such that there exists an $k\in\N$ with any set
+    of $k+1$ elements of $R$ satisfying
+    \[(\ad r_0)(\ad r_1)\cdots(\ad r_k)(d)=0,\]
+    where $(\ad r)(d)=[r,d]=rd-dr$. In this case, we say that $d$ is of order $k$.
+    The submodule of $\C$-derivations of order $\leqslant 0$, in particular, is simply
+    $\Hom_R(M,N)$.
+    \label{def:derivations}
+\end{definition}
+
+\begin{remark}
+    The order of a $\C$-derivation provides a natural filtration of the module $\Diff_R(M,N)$.
+    This yields the following inductive definition of $\Diff_R(M,N)$, equivalent to the one
+    above:
+    \begin{enumerate}
+        \item[] $\Diff^{i}_R(M,N) = 0; \;\;\;(i<0)$
+        \item[] $\Diff^k_R(M,N) = \{u\in\Hom_\C(M,N)\mid (\ad r)(u)\in \Diff^{k-1}_R(M,N), r\in R\};$
+        \item[] $\Diff_R(M,N)=\bigcup_k\Diff^k_R(M,N)$.
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    Let $\mathcal{M},\mathcal{N}$ be $\mathcal{O}_X$-modules. We define the $\mathcal{O}_X$-module $\mathcal{D}(\mathcal{M},\mathcal{N})$ of $\C$-derivations
+    from $\mathcal{M}$ to $\mathcal{N}$ by localizing the construction of Defintion \ref{def:derivations}.
+    More explicitly, we define $\mathcal{D}(\mathcal{M},\mathcal{N})$ to be the subsheaf of $\sHom_\C(\mathcal{M},\mathcal{N})$
+    whose sections on an open set $U\subset X$ are morphisms whose evaluations at $U\cap V$, for every
+    open affine $V$, are $\Diff_{\mathcal{O}_X(U\cap V)}(\mathcal{M}(U\cap V),\mathcal{N}(U\cap V))$.
+    We will often write $\mathcal{D}(\mathcal{M})\equiv\mathcal{D}(\mathcal{M,M})$ and $\mathcal{D}_X\equiv\mathcal{D}(\mathcal{O}_X)$.
+\end{definition}
+\begin{proof}
+    Let us check that $\mathcal{D}(\mathcal{M},\mathcal{N})$ is indeed a sheaf. It is clearly
+    a presheaf when equipped with the restriction maps inherited from $\sHom_\C(\mathcal{M},\mathcal{N})$.
+    Moreover, it is separated by virtue of being a subpresheaf of $\sHom_\C(\mathcal{M},\mathcal{N})$.
+    Hence it suffices to check that sections glue. Let $U\subset X$ be open, $\{U_i\}_{i\in I}$ be
+    an open cover for $U$, and $s_i\in\mathcal{D}(\mathcal{M},\mathcal{N})(U_i)$ agreeing on
+    overlaps. The sheaf condition
+    on $\sHom_\C(\mathcal{M},\mathcal{N})$ yields a section $s\in\sHom_\C(\mathcal{M},\mathcal{N})(U)$
+    such that $s|_{U_i}=s_i$. It remains to show that $s\in\mathcal{D}(\mathcal{M},\mathcal{N)}(U)$, that is
+    to say, for any open affine $V\subset X$, $s|_{U\cap V}\in\Diff_{\mathcal{O}_X(U\cap V)}(\mathcal{M}(U\cap V),\mathcal{N}(U\cap V))$.
+    Writing $V_i=V\cap U_i$ we obtain $\C$-derivations $d_i=s_i|_{V_i}(V_i)$ of order $k_i$. Taking
+    $k=\max_{i\in I} k_i$ to be the maximum order of these derivations\footnote{this is bullshit}, we claim that
+    \begin{equation*}
+        (\ad f_0)(\ad f_1)\cdots(\ad f_k)(s|_{U\cap V})=0\tag{$\star$}
+    \end{equation*}
+    for any $k+1$ regular functions $f_i\in\mathcal{O}_X(V)$. To see this, fix $m\in\mathcal{M}(V)$
+    with restrictions $m_i\in\mathcal{M}(V_i)$. Then the restriction of the left-hand side of ($\star$)
+    to $V_i$ sends $m_i$ to $0\in\mathcal{N}(V_i)$. The commutativity of sheaf homomorphisms,
+    \begin{equation*}
+        \begin{tikzcd}
+            \mathcal{M}(V)\ar{r}{s|_{U\cap V}}\ar{d}{\rho^\mathcal{M}_{V_iV}} & \mathcal{N}(V)\ar{d}{\rho^\mathcal{N}_{V_iV}}\\
+            \mathcal{M}(V_i)\ar{r}{d_i} & \mathcal{N}(V_i)
+        \end{tikzcd}
+    \end{equation*}
+    together with the sheaf condition on $\mathcal{N}$ forces the left-hand side of $(\star)$
+    to send $m$ to $0\in\mathcal{N}(V).$ Since $m$ is arbitrary, we obtain the equality ($\star$),
+    whence $s|_{U\cap V}\in\Diff_{\mathcal{O}_X(U\cap V)}(\mathcal{M}(U\cap V),\mathcal{N}(U\cap V))$
+    and $s\in\mathcal{D}(\mathcal{M},\mathcal{N})(U)$.
+\end{proof}
+
+\begin{remark}
+    One might instead define the sheaf $\mathcal{D}(\mathcal{M},\mathcal{N})$ on open affine subsets $U$ as
+    \[\Gamma(U,\mathcal{D}(\mathcal{M},\mathcal{N}))=\Diff_{\mathcal{O}_X(U)}(\mathcal{M}(U),\mathcal{N}(U)),\]
+    and localizing/gluing to obtain a sheaf (c.f. Hartshorne ex II.1.22 and II.5.?).
+    This construction agrees with the above definition on the
+    basis of open affine subsets of $X$, and hence, by Stacks Tag 009Q, yields the same sheaf.
+\end{remark}
+
+\begin{proposition}
+    Order of derivations provides the $\mathcal{O}_X$-module $\mathcal{D}(\mathcal{M})$ with
+    a filtration, making it a filtered sheaf of rings.
+\end{proposition}
+\begin{proof}
+    Fix $U\subset X$ open. Sections of $\mathcal{D}(\mathcal{M})(U)$ are $\underline{\C}$-linear
+    sheaf homomorphisms $\phi:\mathcal{M}|_U\to\mathcal{M}|_U$. Defining multiplication as composition
+    of sections, we obtain a sheaf of rings. We give $\mathcal{D}(M)$ a filtration by specifying
+    $F^k\mathcal{D}(\mathcal{M})$ to be the subsheaf consisting of morphisms which, over every affine
+    open $V$, lie in $\Diff^k_{\mathcal{O}_X(V)}(\mathcal{M}(V),\mathcal{M}(V))$. It is easy to see
+    that restriction maps preserve the filtration and that $\cup_kF^k\mathcal{D}(\mathcal{M})=\mathcal{D}(\mathcal{M})$.
+    It remains to check that
+    $F^i\mathcal{D}(\mathcal{M})\cdot F^j\mathcal{D}(\mathcal{M})\subset F^{i+j}\mathcal{D}(\mathcal{M})$.
+    This follows from the filtration on $\Diff_R(M,M)\equiv\Diff_R(M)$ (for $M$ an $R$-module);
+    if $\alpha\in\Diff^i_R(M),\beta\in\Diff^j_R(M),r\in R$,
+    \[ [\alpha\beta,r] = \alpha\beta r-r\alpha\beta = \alpha[\beta,r] +[\alpha,r]\beta.  \]
+    Now $[\alpha,r]$ is of order $i-1$ and $[\beta,r]$ is of order $j-1$, so induction
+    yields the case of degree $i$ times an $R$-linear endomorphism $f$ (degree zero), but
+    \[ [\alpha f, r]=\alpha fr-r\alpha f=\alpha rf-r\alpha f=[\alpha,r]f, \]
+    so induction yields the case of the product two $R$-linear endomorphisms, which is another
+    $R$-linear endomorphism, hence degree 0.
+\end{proof}
+
+\begin{remark}
+    The sheaf of rings $\mathcal{D}(\mathcal{M})$ is not, in general, commutative or even
+    almost-commutative (that is to say, $\gr_F \mathcal{D}(\mathcal{M})$ is not commutative).
+    This is due to the fact that the endomorphism ring $\Diff_R^0(M)=\End_R(M)$ need not be
+    commutative.\footnote{Perhaps it is worth mentioning the alternate definition of $\Diff$ here? We
+    should learn more about the two definitions, although probably it is no big deal since
+    they yield the same thing for $\mathcal{D}_X$.}
+\end{remark}
+
+\begin{proposition}
+    If $\mathcal{M},\mathcal{N}$ are locally free, we obtain an isomorphism
+    \[\mathcal{D}(\mathcal{M},\mathcal{N})=\mathcal{N}\otimes_{\mathcal{O}_X}\mathcal{D}_X\otimes_{\mathcal{O}_X}\mathcal{M}^*.\]
+\end{proposition}
+\begin{proof}
+    Depending on the proof, this may or may not belong in the next section.
+\end{proof}
+
+\subsection{The sheaf $\mathcal{D}_X$}
+
+Recall that we have defined $\mathcal{D}_X\equiv\mathcal{D}(\mathcal{O}_X,\mathcal{O}_X)$.
+The following properties are fundamental.
+
+\begin{proposition}\hspace{1mm}
+    \begin{enumerate}[(i)]
+        \item Each $F_i\mathcal{D}_X$ is a locally free $\mathcal{O}_X$-module of finite rank;
+        \item $F_0\mathcal{D}_X=\mathcal{O}_X$, $F_i\mathcal{D}_X\cdot F_j\mathcal{D}_X=F_{i+j}\mathcal{D}_X$;
+        \item If $P\in F_i\mathcal{D}_X$ and $Q\in F_j\mathcal{D}_X$, then $[P,Q]\in F_{i+j-1}\mathcal{D}_X$;
+        \item $\mathcal{D}_X$ is almost-commutative, i.e. $\gr_F\mathcal{D}_X$ is commutative.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\begin{remark}
+    This filtration on $\mathcal{D}_X$ (inherited from the filtration on $\mathcal{D}(\mathcal{M})$)
+    is often called the \textbf{geometric filtration}.\footnote{what is the arithmetic filtration?}
+\end{remark}
+
+\begin{example}
+    Provide some examples of $\mathcal{D}_X$-modules.
+\end{example}
+
+
+%\printbibliography
+
+\end{document}
