@@ -33,6 +33,9 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\Fl}{Fl}
+\DeclareMathOperator{\PP}{\mathbb{P}}
 \DeclareMathOperator{\Der}{Der}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Hom}{Hom}
@@ -42,6 +45,10 @@
 \DeclareMathOperator{\gr}{gr}
 \DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\rk}{rk}
+
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\GL}{GL}
 
 \begin{document}
 
@@ -62,7 +69,7 @@ of certain sheaves of differential operators.
     of homomorphisms $d\in\Hom_\C(M,N)$ such that there exists an $k\in\N$ with any set
     of $k+1$ elements of $R$ satisfying
     \[(\ad r_0)(\ad r_1)\cdots(\ad r_k)(d)=0,\]
-    where $(\ad r)(d)=[r,d]=rd-dr$. In this case, we say that $d$ is of order $k$.
+    where $(\ad r)(d)=[r,d]=rd-dr$. In this case, we say that $d$ is of order $\leqslant k$.
     The submodule of $\C$-derivations of order $\leqslant 0$, in particular, is simply
     $\Hom_R(M,N)$.
     \label{def:derivations}
@@ -97,7 +104,7 @@ of certain sheaves of differential operators.
     on $\sHom_\C(\mathcal{M},\mathcal{N})$ yields a section $s\in\sHom_\C(\mathcal{M},\mathcal{N})(U)$
     such that $s|_{U_i}=s_i$. It remains to show that $s\in\mathcal{D}(\mathcal{M},\mathcal{N)}(U)$, that is
     to say, for any open affine $V\subset X$, $s|_{U\cap V}\in\Diff_{\mathcal{O}_X(U\cap V)}(\mathcal{M}(U\cap V),\mathcal{N}(U\cap V))$.
-    Writing $V_i=V\cap U_i$ we obtain $\C$-derivations $d_i=s_i|_{V_i}(V_i)$ of order $k_i$. Taking
+    Writing $V_i=V\cap U_i$ we obtain $\C$-derivations $d_i=s_i|_{V_i}(V_i)$ of order $\leqslant k_i$. Taking
     $k=\max_{i\in I} k_i$ to be the maximum order of these derivations\footnote{this is bullshit}, we claim that
     \begin{equation*}
         (\ad f_0)(\ad f_1)\cdots(\ad f_k)(s|_{U\cap V})=0\tag{$\star$}
@@ -122,7 +129,8 @@ of certain sheaves of differential operators.
     \[\Gamma(U,\mathcal{D}(\mathcal{M},\mathcal{N}))=\Diff_{\mathcal{O}_X(U)}(\mathcal{M}(U),\mathcal{N}(U)),\]
     and localizing/gluing to obtain a sheaf (c.f. Hartshorne ex II.1.22 and II.5.?).
     This construction agrees with the above definition on the
-    basis of open affine subsets of $X$, and hence, by Stacks Tag 009Q, yields the same sheaf.
+    basis of open affine subsets of $X$, and hence, by Stacks Tag 009Q, yields the same sheaf.\footnote{We
+    should perhaps move this trick into its own lemma, as it recieves use elsewhere. Or maybe not?}
 \end{remark}
 
 \begin{proposition}
@@ -141,7 +149,7 @@ of certain sheaves of differential operators.
     This follows from the filtration on $\Diff_R(M,M)\equiv\Diff_R(M)$ (for $M$ an $R$-module);
     if $\alpha\in\Diff^i_R(M),\beta\in\Diff^j_R(M),r\in R$,
     \[ [\alpha\beta,r] = \alpha\beta r-r\alpha\beta = \alpha[\beta,r] +[\alpha,r]\beta.  \]
-    Now $[\alpha,r]$ is of order $i-1$ and $[\beta,r]$ is of order $j-1$, so induction
+    Now $[\alpha,r]$ is of order $\leqslant (i-1)$ and $[\beta,r]$ is of order $\leqslant(j-1)$, so induction
     yields the case of degree $i$ times an $R$-linear endomorphism $f$ (degree zero), but
     \[ [\alpha f, r]=\alpha fr-r\alpha f=\alpha rf-r\alpha f=[\alpha,r]f, \]
     so induction yields the case of the product two $R$-linear endomorphisms, which is another
@@ -168,6 +176,101 @@ of certain sheaves of differential operators.
 \subsection{The sheaf $\mathcal{D}_X$}
 
 Recall that we have defined $\mathcal{D}_X\equiv\mathcal{D}(\mathcal{O}_X,\mathcal{O}_X)$.
+An often-used definition equivalent to the above is as follows.\footnote{why is this equivalent?} 
+
+\begin{definition}
+    Define $\mathcal{D}_X$ to be the sheaf associated to the subpresheaf of $\sHom_{\C_X}(\mathcal{O}_X,\mathcal{O}_X)$
+    generated as a $\C_X$-algebra by (multiplication by) $\mathcal{O}_X$ and (derivation by)
+    $\Theta_X$. Explicitly, for any open $U\subset X$, the sections of $\mathcal{D}_X(U)$ are
+    the endomorphisms which are locally generated -- i.e. over an open cover $U_i$ of $U$ depending
+    on the endomorphism -- by 
+    $\{\tilde f,\tilde \partial\mid f\in\mathcal{O}_X(U_i),\partial\in\Theta_X(U_i)\}$
+    subject to the relations
+    \begin{enumerate}[(i)]
+        \item $\tilde f_1+\tilde f_2=\widetilde{f_1+f_2}, \;\;\; \tilde f_1\tilde f_2=\widetilde{f_1f_2};$
+        \item $\tilde \partial_1 +\tilde \partial_2=\widetilde{\partial_1+\partial_2}, \;\; [\tilde\partial_1,\tilde\partial_2]=\widetilde{[\partial_1,\partial_2]};$
+        \item $\tilde f\tilde \partial=\widetilde{f\partial}, \;\;\; [\tilde\partial,\tilde f]=\widetilde{\partial(f)}$.
+    \end{enumerate}
+    \label{def:D_X2}
+\end{definition}
+
+\begin{proposition}
+    Let $R$ be a commutative $\C$-algebra. Then the subalgebra of $\End_\C(R)$ generated
+    by (multiplication by) $R$ and (derivation by) $\Der_\C(R)$ is isomorphic as a filtered
+    $\C$-algebra to $\Diff_R(R)$.
+\end{proposition}
+\begin{proof}
+    Let $\phi\in\Diff^k_R(R)$ be an operator of order $\leqslant k$ and define $\psi=\phi-\phi(1)$
+    under the identification $\phi(1)\in R=\Diff^0_R(R)$, also of order $\leqslant k$.
+    We show first, by induction, that $\psi$ satisfies the Leibniz rule.\footnote{base case?}
+    In other words, $[\psi, r]$ is of order $\leqslant (k-1)$ for all $r\in R$, which by the
+    induction hypothesis satisfies 
+    \[ [\psi,r](ab)=[\psi,r](a)b+a[\psi,r](b).  \]
+    Expanding this, we find that
+    \begin{align*}
+        [\psi,r](ab) &= \left( \psi(ra)-r\psi(a) \right)b+a\left( \psi(rb)-r\psi(b) \right)\\
+        &= b\psi(ra) - rb\psi(a) + a\psi(rb) - ra\psi(b)
+    \end{align*}
+\end{proof}
+
+This definition is especially useful due to the following coordinate description.
+
+\begin{lemma}
+    For each $p\in X$ there exists an affine open $U\ni p$ and sections
+    $x_i\in\mathcal{O}_X(V),\partial_i\in\Theta_X(V)$ (for $1\leq i\leq n=\dim X$) satisfying
+    \begin{enumerate}[(i)]
+        \item $[\partial_i,\partial_j]=0$;
+        \item $\partial_i(x_j)=\partial_{ij}$;
+        \item $\Theta_X(V)=\bigoplus_{i=1}^n\mathcal{O}_X(V)\partial_i$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Since $X$ is smooth, the stalk $\mathcal{O}_{X,p}$ is a regular local ring. Then the maximal
+    ideal $\fr m_p\subset \mathcal{O}_{X,p}$ is generated by $n$ elements, call them
+    $x_1,\ldots,x_n\in\fr m_p$. Then $\Omega^1_{X,p}$ is a free $O_{X,p}$-module generated
+    by $dx_1,\ldots, dx_n$.\footnote{explain this} Thus there exists an affine open neighboorhood
+    $V$ of $p$ such that $\Omega_X(V)$ is a free $\mathcal{O}_X(V)$-module with basis
+    $dx_1,\ldots,dx_n$.\footnote{why?} Fixing the dual basis $\partial_1,\ldots,\partial_n\in\Theta_X(V)$
+    satisfying $dx_i(\partial_j)=\delta_{ij}$, we find that $\partial_j(x_i)=\delta_{ij}$.
+\end{proof}
+
+%define $\mathcal{D}_X$ to be the
+%subsheaf of $\sHom_{\C_X}(\mathcal{O}_X,\mathcal{O}_X)$ generated as a $\C_X$-algebra by
+%(multiplication by) $\mathcal{O}_X$ and (derivation by) $\Theta_X$. To check that this definition
+%is equivalent to $\mathcal{D}(\mathcal{O}_X,\mathcal{O}_X)$, it suffices to check that the
+%sections agree on the basis of affine opens. Explicitly, this requires checking that
+%for $U\subset X$ affine open, $\Diff_{\mathcal{O}_X(U)}(\mathcal{O}_X(U))$ is isomorphic
+%to the algebra generated by
+%$\{\tilde f,\tilde \partial\mid f\in\mathcal{O}_X(U),\partial\in\Theta_X(U)\}$
+%subject to the relations
+%\begin{enumerate}[(i)]
+%    \item $\tilde f_1+\tilde f_2=\widetilde{f_1+f_2}, \;\;\; \tilde f_1\tilde f_2=\widetilde{f_1f_2};$
+%    \item $\tilde \partial_1 +\tilde \partial_2=\widetilde{\partial_1+\partial_2}, \;\; [\tilde\partial_1,\tilde\partial_2]=\widetilde{[\partial_1,\partial_2]};$
+%    \item $\tilde f\tilde \partial=\widetilde{f\partial}, \;\;\; [\tilde\partial,\tilde f]=\widetilde{\partial(f)}$.
+%\end{enumerate}
+% 
+
+%The following is an often-used, equivalent definition of $\mathcal{D}_X$, amenable to a
+%coordinate description.
+%\begin{definition}
+%    We define the sheaf $\widetilde{\mathcal{D}_X}$ to be the sheaf of endomorphisms of $\mathcal{O}_X$
+%    generated as a $\C_X$-algebra by (multiplication by) $\mathcal{O}_X$ and (derivation by) $\Theta_X$.
+%    More explicitly, we define $\widetilde{\mathcal{D}_X}$ to be the subsheaf of $\sHom_{\C_X}(\mathcal{O}_X,\mathcal{O}_X)$
+%    whose sections on an open set $U\subset X$ are morphisms whose evaluations at $U\cap V$, for
+%    every open affine $V$, are in the algebra generated by $\{\tilde f,\tilde \partial\mid f\in\mathcal{O}_X(U\cap V),\partial\in\Theta_X(U\cap V)\}$
+%    subject to the relations
+%    \begin{enumerate}
+%        \item[] $\tilde f_1+\tilde f_2=\widetilde{f_1+f_2}, \;\;\; \tilde f_1\tilde f_2=\widetilde{f_1f_2};$
+%        \item[] $\tilde \partial_1 +\tilde \partial_2=\widetilde{\partial_1+\partial_2}, \;\; [\tilde\partial_1,\tilde\partial_2]=\widetilde{[\partial_1,\partial_2]};$
+%        \item[] $\tilde f\tilde \partial=\widetilde{f\partial}, \;\;\; [\tilde\partial,\tilde f]=\widetilde{\partial(f)}$.
+%    \end{enumerate}
+%    Then $\widetilde{\mathcal{D}_X}$ is isomorphic to the sheaf $\mathcal{D}_X$ defined earlier.
+%\end{definition}
+%\begin{proof}
+%    First we check that $\widetilde{\mathcal{D}_X}$ is indeed a sheaf. It is easy to see that
+%    it is a separated subpresheaf (of rings) of the sheaf $\sHom_{\C_X}(\mathcal{O}_X,\mathcal{O}_X)$.
+%\end{proof}
+
 The following properties are fundamental.
 
 \begin{proposition}\hspace{1mm}
@@ -191,6 +294,123 @@ The following properties are fundamental.
     Provide some examples of $\mathcal{D}_X$-modules.
 \end{example}
 
+
+\subsection{The flag variety of $G$}
+
+\begin{definition}
+    Let $V$ be an $n$-dimensional complex vector space. We define the \textbf{Grassmanian} $\Gr(d,V)$
+    to be the set of $d$-dimensional subspaces of $V$. The following result shows that $\Gr(d,V)$ is,
+    in fact, a projective variety.
+\end{definition}
+
+\begin{proposition}
+    The set $\Gr(d,V)$ has the structure of a projective variety.
+\end{proposition}
+\begin{proof}
+    Define the map $f:\Gr(d,V)\to\PP(\bigwedge^dV)$ as taking any $d$-dimensional subspace $W\subset V$ to the
+    line $\bigwedge^d W\subset \bigwedge^dV$. More explicitly, if we fix a basis $v_1,\ldots, v_d$ for $W$,
+    we find that $f(W)=[v_1\wedge\cdots\wedge v_d]$. Now it suffices to show that $f$ is injective with closed image.
+
+    Injectivity is straightforward: suppose $W,W'\subset V$ are a pair of $d$-dimensional subspaces of $V$
+    with bases $v_1,\ldots,v_d$ and $v_1',\ldots,v_d'$ respectively. If $f(W)=f(W')$, we must have that
+    $v_1\wedge\cdots\wedge v_d=\lambda v_1'\wedge\cdots\wedge v_d'$ for some $\lambda\in\C$. This implies
+    that $W=W'$, since $W$ (resp. $W'$) is exactly the set of vectors $w\in V$ (resp. $w'\in V$) satisfying
+    $w\wedge v_1\wedge\cdots\wedge v_d=0$ (resp. $w'\wedge v_1'\wedge\cdots\wedge v_d'=0$).
+
+    To show that the image of $f$ is closed, we first remark that the image of $f$ is (up to scaling) the subset
+    of totally decomposable vectors in $\bigwedge^dV$: wedge products $v_1\wedge\cdots\wedge v_d$
+    of $d$ linear factors $v_i\in V$. It is easy to see that $\omega\in\bigwedge^dV$ is totally decomposable if
+    and only if the space of vectors $v$ dividing it, i.e. $v\wedge\omega=0$, is $d$-dimensional.
+    Hence $[\omega]$ is in the image of $f$ if and only if the map $\cdot\wedge\omega:V\to \bigwedge^{d+1}V$
+    taking $v\mapsto v\wedge \omega$ is of rank $n-d$. But since $\omega\in\bigwedge^dV$ can never
+    be divisble by more than $d$ linearly independent vectors of $V$, the rank of $\cdot\wedge\omega$
+    is always $\geqslant n-d$. Thus
+    \[ [\omega]\in\im f\text{ if and only if }\rk(\cdot\wedge\omega)\leqslant n-d.\]
+    Thus $\Gr(d,V)=\im f$ is determined by the vanishing of the determinants of $(n-d+1)\times(n-d+1)$ minors
+    of the matrix $\cdot\wedge\omega\in\Hom(V,\bigwedge^{d+1}V)$.
+    Since the map $\omega\mapsto \cdot\wedge\omega$ is linear, the matrix elements of $\cdot\wedge\omega$
+    are linear in coordinates of $\bigwedge^dV$, and hence the determinants are homogeneous, degree $(n-d+1)$
+    polynomials in the coordinates of $\bigwedge^dV$. This shows that $\Gr(d,V)$ is indeed
+    Zariski-closed in $\PP(\bigwedge^dV)$.
+\end{proof}
+
+\begin{definition}
+    Let $V$ be an $n$-dimensional complex vector space. We define a $k$-\textbf{flag}
+    in $V$ to be a sequence of proper inclusions of subspaces
+    \[\{0\}=V_0 \subset V_1 \subset \cdots \subset V_k=V.\]
+    We say that $d_I=(\dim V_1,\ldots,\dim V_k)$ is the \textbf{signature} of the flag.
+    We define the \textbf{flag variety} $\Fl(d_I,V)$ to be the set of all $k$-flags in $V$ with signature $d_I$.
+\end{definition}
+
+\begin{remark}
+    We will typically be working with \textbf{complete flag varieties} $\Fl(V)=\Fl( (1,\ldots,n), V)$.
+\end{remark}
+
+\begin{proposition}
+    The set $\Fl(d_I,V)$ has the structure of a projective variety.\footnote{Reference: http://sierra.nmsu.edu/morandi/notes/grassmannian.pdf}
+\end{proposition}
+\begin{proof}
+    We can write
+    \[\Fl(d_I,V)=\{(V_1, \cdots,V_k)\in\Gr(d_1,V)\times\cdots\times\Gr(d_k,V) \mid V_{i}\subset V_{i+1}\}.\]
+    To prove that $\Fl(d_I,V)$ is a subvariety of the product of Grassmannians,
+    it suffices to show that $\{(W_1,W_2)\in\Gr(d_1,V)\times\Gr(d_2,V) \mid W_1\subset W_2\}$ is closed
+    in $\Gr(d_1,V)\times\Gr(d_2,V)$ where $d_1<d_2$. The set $\Fl(d_I,V)$ is then simply the intersection
+    of such sets.
+    
+    Let $v_1,\ldots, v_{d_1}$ be a basis for $W_1$
+    and $v_1',\ldots, v_{d_2}'$ be a basis for $W_2$ and write $\omega_1=v_1\wedge\cdots\wedge v_{d_1}$
+    and $\omega_2=v_1'\wedge\cdots\wedge v_{d_2}'$. As in the proof above, we consider the map
+    $\phi:\cdot\wedge\omega_1\oplus\cdot\wedge\omega_2:V\to \bigwedge^{d_1+1}V\oplus\bigwedge^{d_2+1}V$.
+    By definition, $\ker(\cdot\wedge\omega_1)=W_1$ and $\ker(\cdot\wedge\omega_2)=W_2$, so
+    $\ker\phi=W_1\cap W_2$. The rank-nullity theorem now yields
+    \begin{align*}
+        \rk\phi &= \dim V - \dim\left( \ker\phi \right)\\
+        &= \dim V - \dim(W_1\cap W_2)\\
+        &\geqslant \dim V - \dim W_1.
+    \end{align*}
+    Furthermore, we have $W_1\subset W_2$ if and only if $W_1\cap W_2=W_1$, from which we conclude that
+    $W_1\subset W_2$ if and only if $\rk\phi\leqslant\dim V-\dim W_1$. Now the argument
+    from the previous proof -- that the determinant of certain minors of the matrix of $\phi$ yields
+    homogeneous polynomials whose vanishing characterizes the rank condition -- completes
+    the proof.
+\end{proof}
+
+\begin{example}
+    Consider the action of $\SL_2$ on $\PP^1$, with homogeneous coordinates $[z_1:z_2]$,
+    given by $g[z_1:z_2]=[g_{11}z_1+g_{12}z_2:g_{21}z_1+g_{22}z_2]$. It is easy to check
+    that the stabilizer of the point $[1:0]$ is the set of all upper diagonal matrices in
+    $\SL_2$. This is precisely the Borel subgroup $B$ of $\SL_2$.\footnote{make sure the
+    Borel subgroup has been introduced, and explain this claim.} Moreover, the orbit of $[1:0]$
+    is clearly the whole variety $\PP^1$. Hence we obtain a bijection between the $\SL_2/B$ of
+    cosets and $\PP^1$, which endows $\SL_2/B$ the structure of the complete flag variety
+    $\Fl(\C^2)\cong\PP^1$.
+
+    More generally, consider the natural action of $\SL_n$ on the complete flag variety
+    $\Fl(\C^n)$ as
+    \[g(V_1,\ldots, V_n) = (gV_1,\ldots, gV_n)\]
+    for any complete flag $(V_1,\ldots,V_n)$. This action is transitive. Let $(W_1,\ldots,W_n)$ be
+    any other complete flag and $\{v_1,\ldots,v_n\}\subset \C^n$ such that for each $i\leqslant n$
+    the first $i$ vectors form a basis for $V_i$, and $\{w_1,\ldots,w_n\}\subset \C^n$ such that
+    for each $i\leqslant n$ the first $i$ vectors form a basis for $W_i$. Then there exists
+    a $\tilde g\in\GL_n$ such that $\tilde gv_i=w_i$. Dividing $g=\tilde g/\det \tilde g$,
+    we find $g\in\SL_n$ taking $(V_1,\ldots,V_n)$ to $(W_1,\ldots,W_n)$. Now consider the
+    complete flag determined by the basis vectors $\{v_1,\ldots,v_n\}$ of $\C^n$. A bit of algebra
+    shows that the stabilizer of this flag is the Borel subgroup $B$ of upper diagonal
+    matrices. Hence the coset space $\SL_n/B$ has the structure of the complete flag variety
+    $\Fl(\C^n)$.
+\end{example}
+
+\begin{remark}
+    Even more generally, one obtains not-necessarily complete, partial flag varieties
+    from quotients of the form $\SL_n/P$ where $P$ is the subgroup of block-diagonal
+    matrices with block sizes corresponding to the signature of the flag variety.\footnote{Is
+    this true? Also: perhaps we should mention something about roots and choice of simple
+    roots in these examples? Of course, the results are independent.} These subgroups
+    are examples of parabolic subgroups.\footnote{reference Borel}
+\end{remark}
+
+\subsection{Equivariant sheaves}
+\subsection{Borel-Weil-Bott}
 
 %\printbibliography
 
