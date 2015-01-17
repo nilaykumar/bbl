@@ -1,0 +1,177 @@
+\chapter{Flag Varieties}
+
+\blurb{We introduce the notion of the flag variety $X$ associated to a semisimple linear algebraic
+    group $G$ and outline some of its basic geometric properties. $G$-equivariant vector
+    bundles on $X$ are of special interest, as their cohomologies relate to representations of $G$
+    via a theorem due to Borel--Weil--Bott.}
+
+
+\section{The flag variety of $G$}
+
+We begin by reviewing some basic ideas from algebraic geometry: the construction
+of the Grassmanian and the flag variety of a vector space.
+
+\begin{definition}
+    Let $V$ be an $n$-dimensional complex vector space. We define the \textbf{Grassmanian} $\Gr(d,V)$
+    to be the set of $d$-dimensional subspaces of $V$. The following result shows that $\Gr(d,V)$ is,
+    in fact, a projective variety.
+\end{definition}
+
+\begin{proposition}
+    The set $\Gr(d,V)$ has the structure of a projective variety.
+\end{proposition}
+\begin{proof}
+    Define the map $f:\Gr(d,V)\to\PP(\bigwedge^dV)$ as taking any $d$-dimensional subspace $W\subset V$ to the
+    line $\bigwedge^d W\subset \bigwedge^dV$. More explicitly, if we fix a basis $v_1,\ldots, v_d$ for $W$,
+    we find that $f(W)=[v_1\wedge\cdots\wedge v_d]$. Now it suffices to show that $f$ is injective with closed image.
+
+    Injectivity is straightforward: suppose $W,W'\subset V$ are a pair of $d$-dimensional subspaces of $V$
+    with bases $v_1,\ldots,v_d$ and $v_1',\ldots,v_d'$ respectively. If $f(W)=f(W')$, we must have that
+    \[v_1\wedge\cdots\wedge v_d=\lambda v_1'\wedge\cdots\wedge v_d'\]
+    for some $\lambda\in\C.$ This implies
+    that $W=W'$, since $W$ (resp. $W'$) is exactly the set of vectors $w\in V$ (resp. $w'\in V$) satisfying
+    $w\wedge v_1\wedge\cdots\wedge v_d=0$ (resp. $w'\wedge v_1'\wedge\cdots\wedge v_d'=0$).
+
+    To show that the image of $f$ is closed, we first remark that the image of $f$ is (up to scaling) the subset
+    of totally decomposable vectors in $\bigwedge^dV$: wedge products $v_1\wedge\cdots\wedge v_d$
+    of $d$ linear factors $v_i\in V$. It is easy to see that $\omega\in\bigwedge^dV$ is totally decomposable if
+    and only if the space of vectors $v$ dividing it, i.e. $v\wedge\omega=0$, is $d$-dimensional.
+    Hence $[\omega]$ is in the image of $f$ if and only if the map $\cdot\wedge\omega:V\to \bigwedge^{d+1}V$
+    taking $v\mapsto v\wedge \omega$ is of rank $n-d$. But since $\omega\in\bigwedge^dV$ can never
+    be divisble by more than $d$ linearly independent vectors of $V$, the rank of $\cdot\wedge\omega$
+    is always $\geqslant n-d$. Thus
+    \[ [\omega]\in\im f\text{ im and only if }\rk(\cdot\wedge\omega)\leqslant n-d.\]
+    Thus $\Gr(d,V)=\im f$ is determined by the vanishing of the determinants of $(n-d+1)\times(n-d+1)$ minors
+    of the matrix $\cdot\wedge\omega\in\Hom(V,\bigwedge^{d+1}V)$.
+    Since the map $\omega\mapsto \cdot\wedge\omega$ is linear, the matrix elements of $\cdot\wedge\omega$
+    are linear in coordinates of $\bigwedge^dV$, and hence the determinants are homogeneous, degree $(n-d+1)$
+    polynomials in the coordinates of $\bigwedge^dV$. This shows that $\Gr(d,V)$ is indeed
+    Zariski-closed in $\PP(\bigwedge^dV)$.
+\end{proof}
+
+\begin{definition}
+    Let $V$ be an $n$-dimensional complex vector space. We define a $k$-\textbf{flag}
+    in $V$ to be a sequence of proper inclusions of subspaces
+    \[\{0\}=V_0 \subset V_1 \subset \cdots \subset V_k=V.\]
+    We say that $d_I=(\dim V_1,\ldots,\dim V_k)$ is the \textbf{signature} of the flag.
+    We define the \textbf{flag variety} $\Fl(d_I,V)$ to be the set of all $k$-flags in $V$ with signature $d_I$.
+\end{definition}
+
+\begin{remark}
+    An oft-used special case is that of the \textbf{complete flag variety} $\Fl(V)=\Fl( (1,\ldots,n), V)$.
+\end{remark}
+
+\begin{proposition}
+    The set $\Fl(d_I,V)$ has the structure of a projective variety.\sidenote{Reference: Morandi's notes}
+\end{proposition}
+\begin{proof}
+    We can write
+    \[\Fl(d_I,V)=\{(V_1, \cdots,V_k)\in\Gr(d_1,V)\times\cdots\times\Gr(d_k,V) \mid V_{i}\subset V_{i+1}\}.\]
+    To prove that $\Fl(d_I,V)$ is a subvariety of the product of Grassmannians,
+    it suffices to show that $\{(W_1,W_2)\in\Gr(d_1,V)\times\Gr(d_2,V) \mid W_1\subset W_2\}$ is closed
+    in $\Gr(d_1,V)\times\Gr(d_2,V)$ where $d_1<d_2$. The set $\Fl(d_I,V)$ is then simply the intersection
+    of such sets.
+    
+    Let $v_1,\ldots, v_{d_1}$ be a basis for $W_1$
+    and $v_1',\ldots, v_{d_2}'$ be a basis for $W_2$ and write $\omega_1=v_1\wedge\cdots\wedge v_{d_1}$
+    and $\omega_2=v_1'\wedge\cdots\wedge v_{d_2}'$. As in the proof above, we consider the map
+    $\phi:\cdot\wedge\omega_1\oplus\cdot\wedge\omega_2:V\to \bigwedge^{d_1+1}V\oplus\bigwedge^{d_2+1}V$.
+    By definition, $\ker(\cdot\wedge\omega_1)=W_1$ and $\ker(\cdot\wedge\omega_2)=W_2$, so
+    $\ker\phi=W_1\cap W_2$. The rank-nullity theorem now yields
+    \begin{align*}
+        \rk\phi &= \dim V - \dim\left( \ker\phi \right)\\
+        &= \dim V - \dim(W_1\cap W_2)\\
+        &\geqslant \dim V - \dim W_1.
+    \end{align*}
+    Furthermore, we have $W_1\subset W_2$ if and only if $W_1\cap W_2=W_1$, from which we conclude that
+    $W_1\subset W_2$ if and only if $\rk\phi\leqslant\dim V-\dim W_1$. Now the argument
+    from the previous proof -- that the determinant of certain minors of the matrix of $\phi$ yields
+    homogeneous polynomials whose vanishing characterizes the rank condition -- completes
+    the proof.
+\end{proof}
+
+\begin{example}
+    \label{ex:flag}
+    Consider the action of $\SL_2$ on $\PP^1$, with homogeneous coordinates $[z_1:z_2]$,
+    given by $g[z_1:z_2]=[g_{11}z_1+g_{12}z_2:g_{21}z_1+g_{22}z_2]$. It is easy to check
+    that the stabilizer of the point $[1:0]$ is the set of all upper diagonal matrices in
+    $\SL_2$. This is precisely the Borel subgroup $B$ of $\SL_2$.\sidenote{make sure the
+    Borel subgroup has been introduced, and explain this claim.} Moreover, the orbit of $[1:0]$
+    is clearly the whole variety $\PP^1$. Hence we obtain a bijection between the $\SL_2/B$ of
+    cosets and $\PP^1$, which endows $\SL_2/B$ the structure of the complete flag variety
+    $\Fl(\C^2)\cong\PP^1$.
+
+    More generally, consider the natural action of $\SL_n$ on the complete flag variety
+    $\Fl(\C^n)$ as
+    \[g(V_1,\ldots, V_n) = (gV_1,\ldots, gV_n)\]
+    for any complete flag $(V_1,\ldots,V_n)$. This action is transitive. Let $(W_1,\ldots,W_n)$ be
+    any other complete flag and $\{v_1,\ldots,v_n\}\subset \C^n$ such that for each $i\leqslant n$
+    the first $i$ vectors form a basis for $V_i$, and $\{w_1,\ldots,w_n\}\subset \C^n$ such that
+    for each $i\leqslant n$ the first $i$ vectors form a basis for $W_i$. Then there exists
+    a $\tilde g\in\GL_n$ such that $\tilde gv_i=w_i$. Dividing $g=\tilde g/\det \tilde g$,
+    we find $g\in\SL_n$ taking $(V_1,\ldots,V_n)$ to $(W_1,\ldots,W_n)$. Now consider the
+    complete flag determined by the basis vectors $\{v_1,\ldots,v_n\}$ of $\C^n$. A bit of algebra
+    shows that the stabilizer of this flag is the Borel subgroup $B$ of upper diagonal
+    matrices. Hence the coset space $\SL_n/B$ has the structure of the complete flag variety
+    $\Fl(\C^n)$.
+\end{example}
+
+\begin{remark}
+    Even more generally, one obtains not-necessarily complete, partial flag varieties
+    from quotients of the form $\SL_n/P$ where $P$ is the subgroup of block-diagonal
+    matrices with block sizes corresponding to the signature of the flag variety.
+    \sidenote{Is this true? Also: perhaps we should mention something about roots and choice of simple
+    roots in these examples? Of course, the results are independent.} These subgroups
+    are examples of parabolic subgroups.
+\end{remark}
+
+In light of Example \ref{ex:flag}, the following result from the theory of
+semisimple linear algebraic groups is important.
+
+\begin{theorem}\hspace{1mm}
+    \begin{enumerate}[(i)]
+        \item All Borel subgroups of $G$ are conjugate. In other words, for any pair
+            $B_1,B_2$ of Borel subgroups of $G$, there exists $g\in G$ such that
+            $gB_1g^{-1}=B_2$.
+        \item The normalizer of a Borel subgroup $B$ of $G$ is $B$ itself.
+        \item The coset space $G/B$ has the structure of a projective variety.
+    \end{enumerate}
+    \label{thm:borel}
+\end{theorem}
+\begin{proof}
+    See Borel\sidenote{find references for this}
+\end{proof}
+
+\begin{definition}
+    The \textbf{flag variety of} $G$ is the projective variety $G/B$.
+\end{definition}
+
+\begin{proposition}
+    The set $X$ of all Borel subgroups of $G$ has the structure of an algebraic
+    variety such that $X\cong G/B$.
+\end{proposition}
+\begin{proof}
+    Theorem \ref{thm:borel} shows that the conjugation action of $G$ on $X$ is transitive
+    and that the stabilizer of any Borel subgroup $B$ is $B$ itself. Hence $X\cong G/B$ as
+    sets, so we can endow $X$ with the structure of a projective algebraic variety.
+\end{proof}
+
+\begin{remark}
+    We could alternatively define $X$ to be the set of all Borel subalgebras $\fr b$ of $G$,
+    and prove statements analogous to
+    %\textit{(i)} and \textit{(ii)} of
+    Theorem \ref{thm:borel}
+    via the adjoint action of $G$ on Borels $\fr b\subset\fr g$ (reference Humphreys\sidenote{find this reference}).
+    %Incidentally, identifying $G/B$ with the set of all Borel subalgebras of $G$ yields the following
+    %easy proof of \textit{(iii)} of Theorem \ref{thm:borel}. $X$ is the subset of the
+    %Grassmannian $\Gr(\dim\fr b,\fr g)$ consisting of all solvable Lie subalgebras.
+    %Why is being a solvable Lie subalgebra a polynomial condition?\sidenote{Figure this out:
+    %    \url{http://math.stackexchange.com/questions/1015974/borel-subalgebras-inside-the-grassmannian}}
+\end{remark}
+
+\section{The geometry of $G/B$}
+
+\section{Equivariant sheaves}
+\section{Borel--Weil--Bott}
+
+

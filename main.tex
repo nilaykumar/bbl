@@ -1,0 +1,79 @@
+\documentclass[12pt]{cuthesis}
+
+\usepackage{amsthm, lipsum, amssymb}
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}{Exercise}[chapter]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\catname}[1]{\normalfont\textbf{#1}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\fr}{\mathfrak}
+
+\DeclareMathOperator{\Gr}{Gr}
+\DeclareMathOperator{\Fl}{Fl}
+\DeclareMathOperator{\PP}{\mathbb{P}}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\sHom}{\mathscr{H}\!om}
+\DeclareMathOperator{\Lie}{Lie}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\gr}{gr}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\rk}{rk}
+
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\GL}{GL}
+
+
+
+
+\author{Matei Ionita\hspace{0.75pc}\textsw{\&}\hspace{0.75pc}Nilay Kumar}
+
+\begin{document}
+\chapterstyle{uio}
+\pagestyle{uio}
+\maxsecnumdepth{subsection}
+
+\frontmatter
+\pagenumbering{alph}
+\maketitle
+\pagenumbering{roman}
+\cleardoublepage
+\tableofcontents
+\clearpage
+
+\include{preface}
+
+\include{notation}
+
+\mainmatter
+
+    \setcounter{chapter}{-1}
+    \include{introduction}
+
+    \part{$\mathscr{D}$--modules}
+        \include{preliminaries}
+
+    \part{Representation Theory}
+        \include{algebraicgroups}
+        \include{flagvarieties}
+    \part{Envoi}
+        \include{Conclusion}
+
+\end{document}

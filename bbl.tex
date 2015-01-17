@@ -376,6 +376,7 @@ The following properties are fundamental.
 \end{proof}
 
 \begin{example}
+    \label{ex:flag}
     Consider the action of $\SL_2$ on $\PP^1$, with homogeneous coordinates $[z_1:z_2]$,
     given by $g[z_1:z_2]=[g_{11}z_1+g_{12}z_2:g_{21}z_1+g_{22}z_2]$. It is easy to check
     that the stabilizer of the point $[1:0]$ is the set of all upper diagonal matrices in
@@ -407,6 +408,50 @@ The following properties are fundamental.
     this true? Also: perhaps we should mention something about roots and choice of simple
     roots in these examples? Of course, the results are independent.} These subgroups
     are examples of parabolic subgroups.\footnote{reference Borel}
+\end{remark}
+
+The following result from the theory of algebraic groups is key.
+
+\begin{theorem}\hspace{1mm}
+    \begin{enumerate}[(i)]
+        \item All Borel subgroups of $G$ are conjugate. In other words, for any pair
+            $B_1,B_2$ of Borel subgroups of $G$, there exists $g\in G$ such that
+            $gB_1g^{-1}=B_2$.
+        \item The normalizer of a Borel subgroup $B$ of $G$ is $B$ itself.
+        \item The coset space $G/B$ has the structure of a projective variety.
+    \end{enumerate}
+    \label{thm:borel}
+\end{theorem}
+\begin{proof}
+    See Borel\footnote{find references for this}
+\end{proof}
+
+In the context of Example \ref{ex:flag}, we make the following definition.
+\begin{definition}
+    The \textbf{flag variety of} $G$ is the projective variety $G/B$.
+\end{definition}
+
+\begin{proposition}
+    The set $X$ of all Borel subgroups of $G$ has the structure of an algebraic
+    variety such that $X\cong G/B$.
+\end{proposition}
+\begin{proof}
+    Theorem \ref{thm:borel} shows that the conjugation action of $G$ on $X$ is transitive
+    and that the stabilizer of any Borel subgroup $B$ is $B$ itself. Hence $X\cong G/B$ as
+    sets, so we can endow $X$ with the structure of a projective algebraic variety.
+\end{proof}
+
+\begin{remark}
+    We could alternatively define $X$ to be the set of all Borel subalgebras $\fr b$of $G$,
+    and prove statements analogous to
+    %\textit{(i)} and \textit{(ii)} of
+    Theorem \ref{thm:borel}
+    via the adjoint action of $G$ on Borels $\fr b\subset\fr g$ (reference Humphreys\footnote{find this reference}).
+    %Incidentally, identifying $G/B$ with the set of all Borel subalgebras of $G$ yields the following
+    %easy proof of \textit{(iii)} of Theorem \ref{thm:borel}. $X$ is the subset of the
+    %Grassmannian $\Gr(\dim\fr b,\fr g)$ consisting of all solvable Lie subalgebras.
+    %Why is being a solvable Lie subalgebra a polynomial condition?\footnote{Figure this out:
+    %    \url{http://math.stackexchange.com/questions/1015974/borel-subalgebras-inside-the-grassmannian}}
 \end{remark}
 
 \subsection{Equivariant sheaves}
