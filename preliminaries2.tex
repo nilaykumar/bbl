@@ -130,12 +130,6 @@ operators in the global sheafified case.
     \label{lemma:hart1}
 \end{lemma}
 \begin{proof}
-Let $g,g'\in\Diff_K(K,N)$ be distinct extensions of $f$, i.e. $g|_L=g'|_L$
-but $g\neq g'$. Now $h=g-g'\in\Diff_K(K,N)$ is zero on $L$. For any $a\in K,l\in L$,
-we find that
-\begin{align*}
-    [h,a](l) &= h(al)-ah(l) = h(al)
-\end{align*}
 \end{proof}
 
 \begin{corollary}
@@ -143,6 +137,8 @@ we find that
     extension of $L$. Suppose that $f:K\to K$ is a differential operator such that $fw-wf$
     has order $\leqslant p$ for all $w$ in $L$. Then $f$ has order $\leqslant p+1$.
 \end{corollary}
+\begin{proof}
+\end{proof}
 
 \begin{lemma}
     Let $R$ be an affine ring with $S\subset R$ a multiplicatively closed subset
@@ -159,8 +155,30 @@ we find that
 \begin{proof}
     We induct on the order $i$ of $P$. For $i=0$, proving the above identity amounts to
     showing that $s^{-1}P(a)=t^{-1}P(b)$, which follows immediately from the $R$-linearity
-    of zeroth-order differential operators. So suppose that $i\geqslant 1$. Then $(\ad's)(P)$
-    has order less than $m$
+    of zeroth-order differential operators. So suppose that $P$ is of order $i\geqslant 1$.
+    Invoking the induction hypothesis on $(\ad's)(P)$, we have
+    \begin{align}
+        \sum_{j=0}^{i-1} (-1)^js^{-j-1}(\ad's)^{j+1}(P)(a) &= \sum_{j=0}^{i-1} (-1)^jt^{-j-1}(\ad't)^j[P,s](b).
+        \label{eq:hart_star}
+    \end{align}
+    Applying the Jacobi identity repeatedly on each term of the right hand side and using the
+    fact that $[s,t]=0$, we can commute the $[\cdot, s]$ to obtain
+    \begin{align*}
+        \text{RHS (\ref{eq:hart_star})} &= \sum_{j=0}^{i-1} (-1)^jt^{-j-1}(\ad's)(\ad't)^j(P)(b)\\
+        &= t^{-1}P(sb)-t^{-1}sP(b)-t^{-2}[P,t](sb)+t^{-2}s[P,t](b)+\\
+        &\indent+ t^{-3}[ [P,t],t](sb) - t^{-3}s[ [P,t],t](b) + \cdots\\
+        &= -s\cdot \text{RHS (\ref{eq:loc_diff})}+t^{-1}P(at)-t^{-2}[P,t](at)+\\
+        &\indent+t^{-3}[ [P,t],t](at)-\cdots 
+    \end{align*}
+    We now claim that
+    \[P(a)=t^{-1}P(at)-t^{-2}[P,t](at)+t^{-3}[ [P,t],t](at)-\cdots,\]
+    i.e. the sum of all but the first terms in the last expression above for RHS (\ref{eq:hart_star})
+    is $P(a)$. This is proved by induction: if $i=0$ then the equation holds because $t^{-1}P(at)=P(a)$
+    by $R$-linearity of $P$ and all higher commutators vanish. Invoking the induction
+    hypothesis on $[P,t]$ yields the equality
+    \[ [P,t](a)=t^{-1}[P,t](at)-t^{-2}[ [P,t],t](at)+\cdots.\]
+    Expanding the commutator on the left and multiplying both sides by $t^{-1}$ yields
+    the desired result. This, together with the results above yields Eq. (\ref{eq:loc_diff}).
 \end{proof}
 
 \begin{remark}
