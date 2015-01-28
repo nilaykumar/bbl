@@ -8,11 +8,22 @@
     $i:G\to G$, such that $\mu$ and $i$ are maps of algebraic varieties
     with respect to which $G$ forms a group. A morphism of algebraic groups
     is a morphism of algebraic varieties that is simultaneously a group
-    homomorphism.
+    homomorphism.\sidenote{For affine algebraic groups, one can reformulate this
+    definition in terms of the coordinate ring $\mathcal{O}_G(G)$. Reference
+    Borel or Mukai.}
 \end{definition}
 
 \begin{example}
-    Provide some examples.
+    \hspace{1mm} 
+    \begin{enumerate}[(i)]
+        \item The affine space $\C$ has a natural additive group structure --
+            we denote the resulting algebraic group by $\G_a$.
+        \item We denote by $\GL_n$ the general linear group of all invertible
+            $n\times n$ matrices. $\GL_n$ has the structure of an open subvariety
+            of $\C^{2n}$: simply take $\GL_n=\Specm\C[x_{11},\ldots,x_{nn},D^{-1}]$
+            where $D=\det(x_{ij})$. The special case $\GL_1=\C^\times$ is sometimes
+            called the multiplicative group $\G_m$.
+    \end{enumerate}
 \end{example}
 
 \begin{theorem}
@@ -22,6 +33,10 @@
 \begin{theorem}
     Smoothness and other properties
 \end{theorem}
+
+\begin{definition}
+    Solvability, etc.
+\end{definition}
 
 \section{Semisimplicity}
 \section{Root systems}

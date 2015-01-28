@@ -1,3 +1,177 @@
 \chapter{Preliminaries}
 
-%\blurb{Science is an essentially anarchic enterprise: theoretical anarchism is more humanitarian and more likely to encourage progress than its law-and-order alternatives.}
+\blurb{We introduce basic definitions and properties relating to $\mathscr{D}$-modules.
+We then detail several functors between categories of $\mathscr{D}$-modules and related results.}
+
+Fix $X$ a smooth complex algebraic variety. We provide a coordinate-independent definition
+of certain sheaves of differential operators.
+
+\begin{definition}
+    Let $R$ be a commutative $\C$-algebra, and $M,N$ be $R$-modules.
+    We define the module of $\C$-derivations $\Diff_R(M,N)$ to be the submodule
+    of homomorphisms $d\in\Hom_\C(M,N)$ such that there exists an $k\in\N$ with any set
+    of $k+1$ elements of $R$ satisfying
+    \begin{equation}
+        (\ad r_0)(\ad r_1)\cdots(\ad r_k)(d)=0,
+        \label{eq:ad}
+    \end{equation}
+    where $(\ad r)(d)=[r,d]=rd-dr$. In this case, we say that $d$ is of order $\leqslant k$.
+    The submodule of $\C$-derivations of order $\leqslant 0$, in particular, is simply
+    $\Hom_R(M,N)$.
+    \label{def:derivations}
+\end{definition}
+
+\begin{remark}
+    The order of a $\C$-derivation provides a natural filtration of the module $\Diff_R(M,N)$.
+    This yields the following inductive definition of $\Diff_R(M,N)$, equivalent to the one
+    above:
+    \begin{enumerate}
+        \item[] $\Diff^{i}_R(M,N) = 0; \;\;\;(i<0)$
+        \item[] $\Diff^k_R(M,N) = \{u\in\Hom_\C(M,N)\mid (\ad r)(u)\in \Diff^{k-1}_R(M,N)\};$
+        \item[] $\Diff_R(M,N)=\bigcup_k\Diff^k_R(M,N)$.
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    Let $\mathcal{M},\mathcal{N}$ be $\mathcal{O}_X$-modules. We define the
+    $\mathcal{O}_X$-module $\mathscr{D}(\mathcal{M},\mathcal{N})$ of $\C$-derivations
+    from $\mathcal{M}$ to $\mathcal{N}$ by localizing the construction of Defintion \ref{def:derivations}.
+    More explicitly, we define $\mathscr{D}(\mathcal{M},\mathcal{N})$ to be
+    the sheafification of the subpresheaf of $\sHom_\C(\mathcal{M},\mathcal{N})$
+    whose sections above an open $U\subset X$ is $\Diff_{\mathcal{O}_X(U)}(\mathcal{M}(U),\mathcal{N}(U))$.
+    Note that we will often write $\mathscr{D}(\mathcal{M})\equiv\mathscr{D}(\mathcal{M,M})$ and
+    $\mathscr{D}_X\equiv\mathscr{D}(\mathcal{O}_X)$.
+    \label{def:D_X}
+\end{definition}
+
+\begin{lemma}
+    Consider $U\subset X$ affine open. Then
+    \[\mathscr{D}_X(U)\cong\Diff_{\mathcal{O}_X(U)}(\mathcal{O}_X(U),\mathcal{O}_X(U)).\]
+    \label{lem:affine1}
+\end{lemma}
+\begin{proof}
+    \sidenote{prove this!}
+\end{proof}
+
+\begin{lemma}
+    Order provides the $\mathcal{O}_X$-module $\mathscr{D}(\mathcal{M})$ with
+    a filtration, making it a filtered sheaf of rings.
+    \label{lem:filter1}
+\end{lemma}
+\begin{proof}
+    Fix $U\subset X$ open. Sections of $\mathscr{D}(\mathcal{M})(U)$ are $\C_X$-linear
+    sheaf homomorphisms $\phi:\mathcal{M}|_U\to\mathcal{M}|_U$. Defining multiplication as composition
+    of sections, we obtain a sheaf of rings. We give $\mathscr{D}(M)$ a filtration by specifying
+    $F^k\mathscr{D}(\mathcal{M})$ to be the subsheaf consisting of morphisms which, over every affine
+    open $V$, lie in $\Diff^k_{\mathcal{O}_X(V)}(\mathcal{M}(V),\mathcal{M}(V))$. It is easy to see
+    that restriction maps preserve the filtration and that $\cup_kF^k\mathscr{D}(\mathcal{M})=\mathscr{D}(\mathcal{M})$.
+    It remains to check that
+    $F^i\mathscr{D}(\mathcal{M})\cdot F^j\mathscr{D}(\mathcal{M})\subset F^{i+j}\mathscr{D}(\mathcal{M})$.
+    This follows\sidenote{explain this better} from the filtration on $\Diff_R(M,M)\equiv\Diff_R(M)$ (for $M$ an $R$-module);
+    if $\alpha\in\Diff^i_R(M),\beta\in\Diff^j_R(M),r\in R$,
+    \[ [\alpha\beta,r] = \alpha\beta r-r\alpha\beta = \alpha[\beta,r] +[\alpha,r]\beta.  \]
+    Now $[\alpha,r]$ is of order $\leqslant (i-1)$ and $[\beta,r]$ is of order $\leqslant(j-1)$, so induction
+    yields the case of degree $i$ times an $R$-linear endomorphism $f$ (degree zero), but
+    \[ [\alpha f, r]=\alpha fr-r\alpha f=\alpha rf-r\alpha f=[\alpha,r]f, \]
+    so induction yields the case of the product two $R$-linear endomorphisms, which is another
+    $R$-linear endomorphism, hence degree $0$.
+\end{proof}
+
+\begin{remark}
+    The sheaf of rings $\mathscr{D}(\mathcal{M})$ is not, in general, commutative or even
+    almost-commutative (that is to say, $\gr_F \mathscr{D}(\mathcal{M})$ is not commutative).
+    This is due to the fact that the endomorphism ring $\Diff_R^0(M)=\End_R(M)$ need not be
+    commutative.\sidenote{Perhaps it is worth mentioning the alternate definition of $\Diff$ here? We
+    should learn more about the two definitions, although probably it is no big deal since
+    they yield the same thing for $\mathscr{D}_X$.}
+\end{remark}
+
+\begin{proposition}
+    If $\mathcal{M},\mathcal{N}$ are locally free, we obtain an isomorphism
+    \[\mathscr{D}(\mathcal{M},\mathcal{N})=\mathcal{N}\otimes_{\mathcal{O}_X}\mathscr{D}_X\otimes_{\mathcal{O}_X}\mathcal{M}^*.\]
+\end{proposition}
+\begin{proof}
+    \sidenote{prove this!}
+\end{proof}
+
+Recall that we have defined $\mathscr{D}_X\equiv\mathscr{D}(\mathcal{O}_X,\mathcal{O}_X)$.
+An often-used definition equivalent to the above is as follows.\sidenote{why is this equivalent?} 
+
+\begin{definition}
+    Define $\mathscr{D}_X$ to be the sheaf associated to the subpresheaf of $\sHom_{\C_X}(\mathcal{O}_X,\mathcal{O}_X)$
+    generated as a $\C_X$-algebra by (multiplication by) $\mathcal{O}_X$ and (derivation by)
+    $\Theta_X$. Explicitly, for any open $U\subset X$, the sections of $\mathscr{D}_X(U)$ are
+    the endomorphisms which are locally generated -- i.e. over an open cover $U_i$ of $U$ depending
+    on the endomorphism -- by 
+    $\{\tilde f,\tilde \partial\mid f\in\mathcal{O}_X(U_i),\partial\in\Theta_X(U_i)\}$
+    subject to the relations
+    \begin{enumerate}[(i)]
+        \item $\tilde f_1+\tilde f_2=\widetilde{f_1+f_2}, \;\;\; \tilde f_1\tilde f_2=\widetilde{f_1f_2};$
+        \item $\tilde \partial_1 +\tilde \partial_2=\widetilde{\partial_1+\partial_2}, \;\; [\tilde\partial_1,\tilde\partial_2]=\widetilde{[\partial_1,\partial_2]};$
+        \item $\tilde f\tilde \partial=\widetilde{f\partial}, \;\;\; [\tilde\partial,\tilde f]=\widetilde{\partial(f)}$.
+    \end{enumerate}
+    \label{def:D_X2}
+\end{definition}
+
+Before we prove that our two definitions are equivalent, we prove the following
+lemma that is useful for local computations.
+\begin{lemma}
+    Consider $U\subset X$ open affine. Then $\mathscr{D}_X(U)$ is precisely
+    the algebra generated by $\mathcal{O}_X(U)$ and $\Theta_X(U)$ as above.
+    \label{lem:affine2}
+\end{lemma}
+\begin{proof}
+    \sidenote{Prove this!}
+\end{proof}
+
+This definition is especially useful due to the following coordinate description.
+
+\begin{lemma}
+    For each $p\in X$ there exists an affine open $U\ni p$ and sections
+    $x_i\in\mathcal{O}_X(V),\partial_i\in\Theta_X(V)$ (for $1\leq i\leq n=\dim X$) satisfying
+    \begin{enumerate}[(i)]
+        \item $[\partial_i,\partial_j]=0$;
+        \item $\partial_i(x_j)=\delta_{ij}$;
+        \item $\Theta_X(V)=\bigoplus_{i=1}^n\mathcal{O}_X(V)\partial_i$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Since $X$ is smooth, the stalk $\mathcal{O}_{X,p}$ is a regular local ring. Then the maximal
+    ideal $\fr m_p\subset \mathcal{O}_{X,p}$ is generated by $n$ elements, call them
+    $x_1,\ldots,x_n\in\fr m_p$. Then $\Omega^1_{X,p}$ is a free $O_{X,p}$-module generated
+    by $dx_1,\ldots, dx_n$.\sidenote{explain this} Thus there exists an affine open neighboorhood
+    $V$ of $p$ such that $\Omega_X(V)$ is a free $\mathcal{O}_X(V)$-module with basis
+    $dx_1,\ldots,dx_n$.\sidenote{why?} Fixing the dual basis $\partial_1,\ldots,\partial_n\in\Theta_X(V)$
+    satisfying $dx_i(\partial_j)=\delta_{ij}$, we find that $\partial_j(x_i)=\delta_{ij}$.\sidenote{finish}
+\end{proof}
+
+\begin{lemma}
+    Under this definition, $\mathscr{D}_X$ becomes a filtered sheaf of rings
+    via the power of derivations.
+    \label{lem:filter2}
+\end{lemma}
+\begin{proof}
+    \sidenote{Prove this!}
+\end{proof}
+
+Let us now show that the two definitions of $\mathscr{D}_X$ are equivalent.
+
+\begin{lemma}
+    The sheaf of rings generated by $\mathcal{O}_X$ and $\Theta_X$ in Definition
+    \ref{def:D_X2} is isomorphic to the sheaf of rings $\mathscr{D}_X=\mathscr{D}(\mathcal{O}_X)$
+    of Definition \ref{def:D_X}.
+\end{lemma}
+\begin{proof}
+    It suffices to show that the sheaves have isomorphic sections on the basis
+    of affine opens. By Lemmas \ref{lem:affine1} and \ref{lem:affine2}, it suffices to
+    find an isomorphism
+    \[\Diff_{\mathcal{O}_X(U)}(\mathcal{O}_X(U),\mathcal{O}_X(U)) \cong \{\tilde f,\tilde \partial\mid f\in\mathcal{O}_X(U),\partial\in\Theta_X(U)\}/\sim\]
+    for $U\subset X$ affine open. For notational convenience, denote the
+    algebra on the left by $A$ and the algebra on the right by $B$. There is a
+    natural inclusion $B\hookrightarrow A$, as any product of derivations of
+    $\mathcal{O}_X(U)$ must satisfy (\ref{eq:ad}).
+    Both $A$ and $B$ are filtered by Lemmas \ref{lem:filter1} and \ref{lem:filter2}
+    -- we prove that the inclusion $B\hookrightarrow A$ is an isomorphism by
+    induction on the filtrations. 
+\end{proof}
+

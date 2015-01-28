@@ -109,20 +109,7 @@
 %%
 
 \RequirePackage{graphicx}
-
 \RequirePackage{tikz}
-
-\RequirePackage{sparklines}
-\colorlet{sparkspikecolor}{bar}
-\setlength{\sparkspikewidth}{5pt}
-
-
-%%
-%% Math
-%%
-
-\RequirePackage{amsmath}
-\RequirePackage{mathrsfs}
 
 
 %%
