@@ -172,6 +172,152 @@ semisimple linear algebraic groups is important.
 \section{The geometry of $G/B$}
 
 \section{Equivariant sheaves}
+We follow the motivation of Chriss and Ginzburg \sidenote{cite here} for the definition of equivariant sheaves.
+We want equivariant sheaves to generalize, in some sense, the concept of invariant functions. Let $X$ be a variety
+equipped with an algebraic $G$-action. An invariant function $f: X \to \C$ satisfies $f(x) = f(gx)$ for all $g$.
+We rephrase this property using the two natural maps $p_2,\sigma : G\times X \to X$ given by the projection on the second
+factor and, respectively, the action of $G$. Then we have
+\begin{align*}
+\sigma^* f(g,x) &= f\big(\sigma(g,x)\big) = f(gx) \\
+p_2^* f(g,x) &= f\big(p_2(g,x)\big) = f(x)
+\end{align*}
+The invariance of $f$ is therefore equivalent to
+\begin{equation}
+\label{eq:finv}
+\sigma^*f = p_2^*f .
+\end{equation}
+This formulation has the advantage of using $f$ and
+the two canonical maps $\sigma,p_2$ only, without reference to elements of $G$ or $X$.
+
+Moreover, the associativity of the $G$-action gives
+\begin{equation}
+\label{eq:fassoc}
+f\big(g_1(g_2x)\big) = f\big((g_1g_2)x\big)
+\end{equation}
+This equation can also be rephrased in terms of functions only. Let $m: G\times G \to G$
+be the group multiplication; then \ref{eq:fassoc} is equivalent to
+\begin{equation}
+\label{eq:fcoc}
+(\id_G \times \sigma)^* \sigma^* f = (m \times \id_X)^* \sigma^* f
+\end{equation}
+as functions on $G \times G \times X$. With these concepts as motivation, we define
+
+\begin{definition}
+Let $X$ be a variety equipped with an algebraic $G$-action. A sheaf $\mathcal{F}$ of 
+$\mathcal{O}_X$ modules is \textbf{G-equivariant} if the following conditions, analogous 
+to \ref{eq:finv} and \ref{eq:fcoc} hold:
+\begin{enumerate}[(a)]
+\item We are given an isomorphism of sheaves on $G\times X$
+\[	\phi : \sigma^* \mathcal{F} \overset{\sim}{\to} p_2^* \mathcal{F}	\]
+\item Let $p_{23}:G\times G \times X \to G\times X$ be the projection onto the second
+and third factors. The pullbacks of $\phi$ are related by the \textbf{cocycle condition}
+\[	p_{23}^* \phi \circ (\id_G \times \sigma)^* \phi = (m \times \id_X)^* \phi	\]
+In other words, the following diagram commutes.
+\[
+\begin{tikzcd}
+(m\times 1_X)^*p_2^* \mathcal{F} = p_{23}^* p_2^*\mathcal{F}\arrow{r}{p_{23}^*\phi}\arrow[swap]{dr}{(m\times \id_X)^*\phi}
+& p_{23}^* \sigma^* \mathcal{F} = (\id_G \times \sigma)^*p_2^* \mathcal{F}\arrow{d}{(\id_G \times \sigma)^*\phi} \\
+& (m\times \id_X)^*\sigma^* \mathcal{F} = (\id_G \times \sigma)^*\sigma^*\mathcal{F}
+\end{tikzcd}
+\]
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+$G$-equivariant sheaves are, in some sense, the same as sheaves on the quotient $X/G$. For instance, assume that the 
+geometric quotient $X/G$ of the action $\sigma : G\times X \to X$ is well-defined, i.e. that
+the orbit space $X/G$ has the structure of an algebraic variety such that:
+\begin{enumerate}[(i)]
+\item The projection $\pi : X \to X/G$ is a morphism of algebraic varieties and a quotient map in the Zariski topology.
+\item For any open $U \in X/G$, $\pi^{\#} : \C[U] \to \C[\pi^{-1}(U)]^G$ is an isomorphism.
+\end{enumerate}
+Then there is an equivalence of categories between sheaves on $X/G$ and $G$-equivariant sheaves on $X$. We do not
+prove this in detail, but give a rough outline, following \sidenote{cite stackexchange answer 
+\url{http://math.stackexchange.com/questions/264796/equivariant-sheaves}}. Observe that $\pi \circ
+\sigma = \pi \circ p_2$ as maps $G\times X \to X/G$. Let $\mathcal{F} \in \textsc{Sh}(X/G)$, then there is a natural
+isomorphism
+\[	\sigma^* \pi^* \mathcal{F} \cong p_2^* \pi^* \mathcal{F} \]
+Therefore $\pi^* \mathcal{F} \in \textsc{Sh}^G(X)$. Conversely, given $\mathcal{G} \in \textsc{Sh}^G(X)$, $\pi_* 
+\mathcal{G} \in \textsc{Sh}(X/G)$. Since $\pi^*$ and $\pi_*$ are adjoint functors, if they are fully faithful then they
+induce an equivalence of categories. \sidenote{figure out why they are fully faithful}
+
+Note that a similar statement holds even when the quotient $X/G$ is not a variety. In that case we would need to talk
+about quotient stacks, which is beyond our current scope.
+\end{remark}
+
+To do: talk about equivariant vector bundles, see HTT for action on cohomology.
+
+
 \section{Borel--Weil--Bott}
+We return to representation theory and to the problem of classifying representations of a semisimple Lie algebra
+$\fr g$. We have seen in section \sidenote{enter section} that finite dimensional representations of $\fr g$ are in
+bijective correspondence with dominant integral weights of $\fr g$. Moreover, given a finite dimensional representation
+$\sigma$ of $\fr g$, we obtain the corresponding weight $\lambda$ of $\fr g$ as the highest weight of $\sigma$.
+In this section we make explicit the reverse correspondence: given $\lambda \in \fr g$ dominant integral, we construct
+explicitly the finite dimensional representation of highest weight $\lambda$. Following Joseph Taylor \sidenote{cite the
+book}, we associate to each $\lambda$ a $G$-equivariant sheaf on the flag variety $X$ of the simply connected Lie group 
+with Lie algebra $\fr g$, via a procedure known as induction. The zeroth cohomology
+group of this sheaf carries a $\fr g$ action, which is the representation we are looking for. This 
+result is the Borel-Weil theorem. The Borel-Weil-Bott theorem is a generalization to weights $\lambda$ that are
+integral but not dominant; in this case, the sheaf obtained by induction carries an irreducible representation of $\fr g$
+on a higher cohomology group. We begin with the following construction.
+
+Let $(\sigma, Q)$ be a finite dimensional representation of $B$. From $\sigma$ we construct a $G$-equivariant
+vector bundle on $X$. \sidenote{This is, in fact, the vector bundle associated to the principal $B$-bundle $G \to X$.} The total space of
+this vector bundle is the following quotient of the product variety $G\times Q$:
+\begin{equation}
+G\times_B Q = G\times Q / \big(g,q\big) \sim \big(gb^{-1} , \sigma(b) q\big)
+\end{equation}
+This equips $G\times_B Q$ with the quotient topology and the quotient structure sheaf. Let $\pi: G\times Q \to 
+G\times_B Q$ and $\rho : G \to X$ be the quotient maps. Then $\rho \circ p_1$ is constant on the fibers of $\pi$,
+so there exists a map $\gamma$ which makes the following diagram commute:
+\[
+\begin{tikzcd}
+\; & G \times Q\arrow[swap]{dl}{p_1}\arrow{dr}{\pi} & \\
+G\arrow[swap]{dr}{\rho} & & G\times_B Q\arrow[dashed]{dl}{\gamma} \\
+ & X & 
+\end{tikzcd}
+\]
+
+\begin{proposition}
+\label{prop:eqvb}
+$\gamma : G\times_B Q \to X$ has the structure of a $G$-equivariant vector bundle.
+\end{proposition}
+\begin{proof}
+$G \to X$ is a principal $B$-bundle, so around each $x \in X$ there is an open $V$ such that $\rho^{-1}(V) \cong
+V \times B$. \sidenote{figure out how this works in the algebraic case} If follows that:
+\begin{align*}
+\pi^{-1} \big(\gamma^{-1}(V) \big) &= (\gamma \circ \pi)^{-1}(V) \\
+&= (\rho \circ p_1)^{-1}(V) \\
+&= p_1^{-1} \big(\rho^{-1}(V) \big) \\
+&\cong p_1^{-1} (V \times B) \\
+&= V \times B \times Q
+\end{align*}
+But $\pi$ is surjective, so this implies $\gamma^{-1}(V) \cong (V \times B)\times_B Q \cong V \times Q$, which gives a local
+trivialization of $G\times_B Q$. Moreover, the isomorphism $\gamma^{-1}(V) \cong V\times Q$ is linear on the fiber of each
+$x \in V$, \sidenote{Write the fiber as $gB \times_B Q$ and show that the isomorphism is linear.}, which makes $G\times_B Q$
+a vector bundle over $X$.
+
+We define an action of $G$ on $G\times_B Q$ as follows. Let $p \in G\times_B Q$ and choose a representative $(g,q) \in \pi^{-1}
+(p)$. Then let $h \cdot p = \pi (hg, q)$ for every $h \in G$. To see that the definition does not depend on the choice of
+representative, assume that $(g',q') \sim (g,q)$. Then clearly $(hg',q') \sim (hg,q)$, so $\pi(hg',q') = \pi(hg,q)$. Finally
+we prove that, equipped with this action, $G\times_B Q \to X$ is $G$-equivariant:
+\begin{align*}
+\gamma(h \cdot p) &= \gamma \circ \pi (hg, q) \\
+&= \rho(hg) \\
+&= h \cdot \rho(g) \\
+&= h \cdot (\rho \circ p_1)(g,q) \\
+&= h \cdot \gamma(p)
+\end{align*}
+\end{proof}
+
+
+
+
+
+
+
+
+
 
 
