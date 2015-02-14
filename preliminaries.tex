@@ -147,16 +147,39 @@ Refer to the example of the Weyl algebra % TODO
     Thus any $d\in\Der_\C S$ can
     be written $d=f_1(x,y)\partial_x+f_2(x,y)\partial_y$. For $d$ to be in $\Der_\C^JS$
     we must have, for some $g(x,y)\in\C[x,y]$,
-    \begin{align*}
-        (y^2-x^3)g(x,y) &= d(y^2-x^3)\\
-        &= -3x^2f_1(x,y)+2yf_2(x,y).
-    \end{align*}
-    Up to a factor of $(y^2-x^3)$, it's clear that the only options for $d$ are\sidenote{why?}
+    \begin{align}
+		\label{eq:dergen}
+        (y^2-x^3)g(x,y) &= d(y^2-x^3)\nonumber\\
+        &= -3x^2f_1(x,y)+2yf_2(x,y). 
+    \end{align}
+    We claim that, up to adding elements of $J$ to $f_1$ or $f_2$, $\Der_\C^J(S)$ is generated as 
+		an $S$-module by
     \begin{align*}
         d_1 &= 2y\partial_x + 3x^2\partial_y\\
         d_2 &= 2x\partial_x+3y\partial_y.
     \end{align*}
-    By the isomorphism above, we find that $\Der_\C(R)\cong Rd_1\oplus Rd_2$.\sidenote{Write this out.}
+		To see this, note that the freedom in choosing $g(x,y)$ on the LHS of \ref{eq:dergen} allows us
+		to cancel out terms of $f_1, f_2$ that are multiples of $y^2$. Then we can assume
+		\begin{align*}
+		f_1(x,y) &= f_{11}(x) + y f_{12}(x) \\
+		f_2(x,y) &= f_{21}(x) + y f_{22}(x)
+		\end{align*}
+		Plugging this back into \ref{eq:dergen} gives
+		\begin{align*}
+		-3x^2 f_{11}(x) + y \big[ - 3x^2f_{12}(x) + 2f_{21}(x) \big] + y^2 2f_{22}(x) &= (y^2 - x^3) g(x,y)
+		\end{align*}
+		Since the highest power of $y$ on the LHS is 2, it's clear that $g(x,y) = g(x)$. Then we identify 
+		coefficients of powers of $y$ to obtain
+		\begin{align*}
+		3 f_{11}(x) &= 2x f_{22}(x) \\
+		3x^2f_{12}(x) &= 2f_{21}(x)
+		\end{align*}
+		Hence the generators of $\Der_\C^J(S)$ as an $S$-module are $d_1$ and $d_2$ above, corresponding to 
+		$f_{11} = f_{22} = 0$ and $f_{12} = f_{21} = 0$, respectively. Finally, 
+		\begin{align*}
+		\Der_\C(R) &\cong \big( S d_1 \oplus S d_2 \big) / \big(J d_1 \oplus J d_2 \big) \\
+		&\cong R d_1 \oplus R d_2
+		\end{align*}
 
     Having classified the derivations of $R$, we now construct a differential operator
     $P\in D(R)$ not in $\Delta(R)$. Let $L$ be the fraction field of $R$. We first claim that
