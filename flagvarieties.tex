@@ -169,9 +169,29 @@ semisimple linear algebraic groups is important.
     %    \url{http://math.stackexchange.com/questions/1015974/borel-subalgebras-inside-the-grassmannian}}
 \end{remark}
 
-\section{The geometry of $G/B$}
-
 \section{Equivariant sheaves}
+
+Before we discuss equivariant sheaves, it is useful to build some intuition using
+the language of equivariant vector bundles.
+
+\subsection{Algebraic vector bundles}
+
+\begin{definition}
+    Let $\pi:X\to Y$ be a map of complex algebraic varieties. We say that $\pi$ is \textbf{locally trivial}
+    with fiber $Z$ (a complex algebraic variety), if there exists an open cover $\{U_i\}_{i\in I}$ of $Y$ and isomorphisms
+    \[\Phi_i:\pi^{-1}(U_i)\xrightarrow{\sim} U_i\times Z.\]
+    In particular, we say that $\pi$ is an \textbf{algebraic vector bundle of rank $r$} if $Z=\C^r$, for some $r\in\N$,
+    and if for any $i,j\in I$ and any open affine subset $V=\Specm A\subset U_i\cap U_j$, the automorphism
+    \[\Phi_{ji}=\Phi_j\circ\Phi_i^{-1}:\C^r\times \Specm A\to\C^r\times \Specm A\]
+    is induced by an $A$-linear automorphism 
+    \[\Phi_{ji}^\#: A[x_1,\ldots,x_n]\to A[x_1,\ldots,x_n].\]
+\end{definition}
+
+% TODO define algebraic vector bundles
+% TODO define equivariant vector bundles
+% TODO association between algebraic vector bundles and locally free sheaves
+
+
 We follow the motivation of Chriss and Ginzburg \sidenote{cite here} for the definition of equivariant sheaves.
 We want equivariant sheaves to generalize, in some sense, the concept of invariant functions. Let $X$ be a variety
 equipped with an algebraic $G$-action. An invariant function $f: X \to \C$ satisfies $f(x) = f(gx)$ for all $g$.
@@ -245,7 +265,40 @@ Note that a similar statement holds even when the quotient $X/G$ is not a variet
 about quotient stacks, which is beyond our current scope.
 \end{remark}
 
-To do: talk about equivariant vector bundles, see HTT for action on cohomology.
+% TODO correspondence b/w equivariant bundles and equivariant sheaves
+
+For $F\to X$ a $G$-equivariant vector bundle, there is a natural linear action of $G$ on the space of
+sections $\Gamma(X,F)$ taking $s\in\Gamma(X,F)$ to $gs\in\Gamma(X,F)$, given by
+\[(gs)(x) = g(s(g^{-1}x)).\]
+We obtain the corresponding action in the setting of equivariant sheaves as follows. First
+note that\sidenote{extend this to cohomology}
+\begin{align*}
+    \Gamma(G\times X,p_2^*\mathcal{F}) &= \Gamma(G\times X, p_2^{-1}\mathcal{F}\otimes_{p_2^{-1}\mathcal{O}_X}\mathcal{O}_{G\times X})\\
+    %&\cong \Gamma\left(G\times X, p_2^{-1}\mathcal{F}\otimes_{p_2^{-1}\mathcal{O}_X}\left(\mathcal{O}_X\otimes_{\C_X}\mathcal{O}_G\right)\right)\\
+    &\cong \Gamma(X,\mathcal{F}) \otimes_{\C}\C[G],
+\end{align*}
+where $\C[G]=\mathcal{O}_G(G)$.\sidenote{Recall that $G$ is affine.} Now consider the isomorphisms
+$\varepsilon_i:G\times X\to G\times X$ for $i=1,2$ given by $(g,x)\mapsto (g,gx)$ and $(g,x)\mapsto(g,g^{-1}x)$, respectively.
+Clearly $\varepsilon_1=\varepsilon_2^{-1}$ and $p_2\circ\varepsilon_1=\sigma$. Hence we find that
+\begin{align*}
+    \Gamma(G\times X,\sigma^*\mathcal{F}) &= \Gamma(G\times X,\varepsilon_1^*p_2^*\mathcal{F})\\
+    &\cong \Gamma(G\times X,(\varepsilon_2)_*p_2^*\mathcal{F})\\
+    &\cong \Gamma(G\times X,p_2^*\mathcal{F})\\
+    &\cong \Gamma(X,\mathcal{F}) \otimes_{\C}\C[G].
+\end{align*}
+Here we have used the fact that $(\varepsilon_1)_*\varepsilon_1^*p_2\mathcal{F}\cong p_2^*\mathcal{F}$.
+Composing this isomorphism with the $G$-equivariant structure
+\[\Gamma(G\times X,p_2^*\mathcal{F})\xrightarrow{\sim}\Gamma(G\times X,\sigma^*\mathcal{F}),\]
+we obtain a map $\Gamma(X,\mathcal{F})\otimes_\C\C[G]\xrightarrow{\sim}\Gamma(X,\mathcal{F})\otimes_\C\C[G]$.
+Denote the restriction of this map to $\Gamma(X,\mathcal{F})\otimes 1$ by
+\[\psi:\Gamma(X,\mathcal{F})\to\Gamma(X,\mathcal{F})\otimes_\C\C[G].\]
+Finally, if for $s\in\Gamma(X,\mathcal{F})$,
+\[\psi(s)=\sum_i s_i\otimes f_i\]
+for some $s_i\in\Gamma(X,\mathcal{F}), f_i\in\C[G]$, the $G$-action on $s$ takes $s$ to $gs$,
+where
+\[gs=\sum_if_i(g)s_i.\]
+In particular, this action is algebraic.\sidenote{what does this even mean? how to compare this
+to bundles? how do we extend this to cohomology?}
 
 
 \section{Borel--Weil--Bott}
