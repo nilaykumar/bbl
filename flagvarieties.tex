@@ -191,6 +191,68 @@ the language of equivariant vector bundles.
 % TODO define equivariant vector bundles
 % TODO association between algebraic vector bundles and locally free sheaves
 
+\begin{proposition}
+\label{principalBbundle}
+Let $G$ be a reductive linear algebraic group, $B$ a Borel subgroup and $\pi : G \to G/B$ the quotient map. Then
+$\pi$ is locally trivial with fiber $B$.
+\end{proposition}
+
+We prove this proposition in the following paragraphs. We first choose a cover of $G$ by the sets $g N^{-} B$, for 
+$g \in G$.\sidenote{Sometimes it's more convenient to work at the level of $G$, rather than the quotient $G/B$.
+Statements about open sets carry over easily from one to the other, using the universal property of quotient maps.}
+The most challenging task is to prove that $g N^{-}B$ is open in $G$. Clearly it suffices to prove this for $g=e$,
+because multiplication by $g$ is an isomorphism.
+
+\begin{lemma}
+The multiplication $N^- \times B \to G$ maps bijectively onto an open subset of $G$. \sidenote{reference Humphreys p. 174}
+\end{lemma}
+\begin{proof}
+$N^- \cap B = \{e\}$, so the multiplication map is injective. Thus, $\dim N^-B = \dim \fr n^- + \dim \fr b
+= \dim \fr g = \dim G$. Moreover, $N^- B$ is the image of a morphism of varieties, so it is constructible. \sidenote{
+Reference Humphreys 4.4.} Then we can write
+\[	N^-B = \bigcup_{i=1}^k U_i \cap K_i	\]
+where $U_i$ are open and $K_i$ are closed in $G$. Assume that no $K_i = G$. Then, since $G$ is irreducible, $\dim U_i \cap
+K_i \leq \dim K_i < \dim G$. \sidenote{Reference Hartshorne ex. I.1.10.} But this implies $\dim N^-B < \dim G$, a 
+contradiction. So we must have $K_i = G$ for some $i$, say $i=1$. Then $U_1 \subset N^-B$, 
+and since open subsets of $G$ are dense in $G$, so is $N^-B$.
+
+Now let $w_0$ be the longest element of the Weyl group $W$. Using $W \cong N(T)/T$, let $g_0$ be a representative
+for $w_0$ in $N(T)$; then $g_0^{-1} B g_0 =B^-$. Since $B^- B = (N^- T)B = N^-(TB) = N^- B$,
+\[	Bg_0B = g_0 B^- g_0^{-1} g_0 B = g_0 B^- B = g_0 N^- B	\]
+i.e. $N^- B$ is isomorphic to the double coset $Bg_0 B$ via multiplication by $g_0$. Hence $Bg_0 B$ is dense in $G$,
+and so is $B g_0 \cdot x$ in $G/B$, where $x$ is the image of $B$ under the quotient map. But $B g_0 \cdot x$ is
+the orbit under $B$ of $g_0 \cdot x \in G/B$, so by \sidenote{Reference Humphreys 8.3.} it is open in its closure
+$G/B$. Therefore $Bg_0 B$ is open in $G$, and so is $N^- B$.
+\end{proof}
+
+We return to the proof of proposition \ref{principalBbundle}. Note that $\pi^{-1}(N^-B / B) = N^- B$; we prove
+that $N^- B \cong N^-B / B \times B$ by constructing an explicit isomorphism. Moreover, the isomorphism will
+commute with multiplication by $G$ on the left, which shows that $\pi^{-1}(gN^-B / B) \cong gN^-B / B \times B$
+for all $g$. The construction follows from the observation that each $n\in N^-$ is the unique element
+of $N^-$ in the preimage $\pi^{-1}(nB/B)$. In other words,
+\begin{equation}
+\label{uniquen}
+\{n\} = N^- \cap \pi^{-1}(nB/B)
+\end{equation}
+Clearly $\pi^{-1}(nB/B) = nB$, and $N^- \cap B = \{e\}$ shows that $N^- \cap nB = \{n\}$. This observation allows
+us to define
+\begin{align*}
+\phi : N^- B/B \times B &\to N^-B 	\\
+(nB/B, b) &\mapsto nb
+\end{align*}
+without any ambiguity in $n$ on the RHS. $\phi$ is bijective, because we can explicitly write the inverse
+\[	nb \mapsto (nB, b)	\]
+Again, there is no ambiguity, because every element of $N^-B$ has a unique decomposition $nb$. $\phi$ is a morphism
+of varieties because the multiplication map of $G$ is, and $\phi^{-1}$ is a morphism of varieties because each of its
+components is:
+\[
+\begin{tikzcd}
+N^-B \arrow{r}{\pi \times p_2} & N^-B/B \times B
+\end{tikzcd}
+\]
+where $p_2(nb) = b$. Therefore $\phi$ is an isomorphism, which finishes the proof that $\pi$ is locally trivial. The
+fiber $nB$ above $nB/B$ is isomorphic to $B$ via multiplication by $n$.
+
 
 We follow the motivation of Chriss and Ginzburg \sidenote{cite here} for the definition of equivariant sheaves.
 We want equivariant sheaves to generalize, in some sense, the concept of invariant functions. Let $X$ be a variety
