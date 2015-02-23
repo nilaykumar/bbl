@@ -174,25 +174,92 @@ semisimple linear algebraic groups is important.
 Before we discuss equivariant sheaves, it is useful to build some intuition using
 the language of equivariant vector bundles.
 
-\subsection{Algebraic vector bundles}
+\subsection{Local triviality}
 
 \begin{definition}
-    Let $\pi:X\to Y$ be a map of complex algebraic varieties. We say that $\pi$ is \textbf{locally trivial}
-    with fiber $Z$ (a complex algebraic variety), if there exists an open cover $\{U_i\}_{i\in I}$ of $Y$ and isomorphisms
-    \[\Phi_i:\pi^{-1}(U_i)\xrightarrow{\sim} U_i\times Z.\]
-    In particular, we say that $\pi$ is an \textbf{algebraic vector bundle of rank $r$} if $Z=\C^r$, for some $r\in\N$,
+    Let $\pi:E\to X$ be a map of complex algebraic varieties. We say that $\pi$ is \textbf{locally trivial}
+    with fiber $F$ (a complex algebraic variety), if there exists an open cover $\{U_i\}_{i\in I}$ of $X$ and isomorphisms
+    \[\Phi_i:\pi^{-1}(U_i)\xrightarrow{\sim} U_i\times F.\]
+    In particular, we say that $\pi$ is an \textbf{algebraic vector bundle of rank $r$ over $X$}
+    if $F=\C^r$, for some $r\in\N$,
     and if for any $i,j\in I$ and any open affine subset $V=\Specm A\subset U_i\cap U_j$, the automorphism
     \[\Phi_{ji}=\Phi_j\circ\Phi_i^{-1}:\C^r\times \Specm A\to\C^r\times \Specm A\]
     is induced by an $A$-linear automorphism 
     \[\Phi_{ji}^\#: A[x_1,\ldots,x_n]\to A[x_1,\ldots,x_n].\]
+    We will often write $E_x$ for the fiber $\pi^{-1}(x)=F$ over $x$. A morphism $f$ between $\pi:E\to X$
+    and $\pi':E'\to X$ is a commutative diagram
+    \begin{equation*}
+        \begin{tikzcd}
+            E\ar{rr}{f}\ar[swap]{rd}{\pi} & & E'\ar{ld}{\pi'}\\
+            & X &
+        \end{tikzcd}
+    \end{equation*}
+    giving us the category $\textsc{Bun}(X)$ of algebraic vector bundles on $X$.
+    Finally, for any open $U\subset X$, we write
+    \[\Gamma(U,E)= \{s:U\to E\mid \pi\circ s=\id_X\}\]
+    for the vector space of (algebraic) sections of the vector bundle $\pi:E\to X$ over $U$.
 \end{definition}
 
-% TODO define algebraic vector bundles
-% TODO define equivariant vector bundles
-% TODO association between algebraic vector bundles and locally free sheaves
+The vector bundles of primary interest to us (especially those used in the proof of the theorem of Borel-Weil-Bott)
+will be those equipped with $G$-actions compatible with the $G$-actions on their base spaces.
 
+\begin{definition}
+    Let $\pi:E\to X$ be a algebraic vector bundle of rank $r$ and $X$ be equipped with the action of a complex
+    linear algebraic group $G$. We say that $\pi$ is a \textbf{$G$-equivariant vector bundle} if 
+    we are given an action of $G$ on $E$ such that $g(E_x)=E_{gx}$ and $g:E_x=\C^r\to \C^r=E_{gx}$ is a
+    linear isomorphism.
+\end{definition}
 
-We follow the motivation of Chriss and Ginzburg \sidenote{cite here} for the definition of equivariant sheaves.
+\begin{remark}
+    An algebraic vector bundle $\pi:E\to X$ may have more than one equivariant structure,
+    given by the chosen $G$-action on the total space $E$. An equivariant vector bundle should
+    therefore be thought of as a vector bundle together with a choice of equivariant structure.
+    
+    Note that given an equivariant structure on $\pi:E\to X$, we can define a $G$-action on
+    global sections as a map $G\times\Gamma(X,E)\to\Gamma(X,E)$ such that
+    \begin{equation}
+        (gs)(x) = g\left( s(g^{-1}x) \right).
+        \label{eq:eqActionSections}
+    \end{equation}
+    This is an algebraic action by virtue of the $G$-actions on both $E$ and $X$ being algebraic.
+\end{remark}
+
+\begin{example}
+    Work through the example of $\SL_2\C$ acting on Serre's bundles over $\PP^1$,
+    using what we know about the finite-dimensional representations of $\SL_2\C$.
+\end{example}
+
+The following lemma shows that the sheaf of sections of an algebraic vector bundle
+is locally free.
+
+\begin{lemma}
+    Let $\pi:E\to X$ be an algebraic vector bundle of rank $r$. The sheaf of sections of $\pi$,
+    call it $\mathcal{E}$, is locally free of rank $r$.
+\end{lemma}
+\begin{proof}
+    We construct a presheaf $\mathcal{E}$ of $\mathcal{O}_X$-modules on $X$ by associating
+    to any open $U\subset X$ the $\mathcal{O}_X(U)$-module $\Gamma(U,E)$, with the obvious
+    restriction maps.\sidenote{finish} 
+\end{proof}
+
+The converse to this lemma is, in fact, true as well -- the next theorem posits that working
+with algebraic vector bundles is actually the same as working with locally free sheaves.
+This theorem allows us to confuse vector bundles and locally free sheaves of finite rank when convenient.
+
+\begin{theorem}
+    The functor taking algebraic vector bundles on $X$ to their sheaves of sections is an
+    equivalence of categories between $\textsc{Bun}(X)$ and the full subcategory of $\textsc{Mod}(\mathcal{O}_X)$
+    consisting of locally free $\mathcal{O}_X$-modules of finite rank.
+\end{theorem}
+\begin{proof}
+    See Hartshorne, exercise II.5.18. Find a better reference that actually proves the equivalence.
+\end{proof}
+
+This equivalence motivates the general definition of equivariant sheaves.
+
+\subsection{Equivariant sheaves}
+
+We now motivate the concept of an equivariant sheaf.\sidenote{reference Chriss/Ginzburg}
 We want equivariant sheaves to generalize, in some sense, the concept of invariant functions. Let $X$ be a variety
 equipped with an algebraic $G$-action. An invariant function $f: X \to \C$ satisfies $f(x) = f(gx)$ for all $g$.
 We rephrase this property using the two natural maps $p_2,\sigma : G\times X \to X$ given by the projection on the second
@@ -221,6 +288,9 @@ be the group multiplication; then \ref{eq:fassoc} is equivalent to
 (\id_G \times \sigma)^* \sigma^* f = (m \times \id_X)^* \sigma^* f
 \end{equation}
 as functions on $G \times G \times X$. With these concepts as motivation, we define
+
+% TODO be careful to use the notation Mod(O_X) for the categories.
+% also introduce the notation in the proper place
 
 \begin{definition}
 Let $X$ be a variety equipped with an algebraic $G$-action. A sheaf $\mathcal{F}$ of 
@@ -262,14 +332,21 @@ Therefore $\pi^* \mathcal{F} \in \textsc{Sh}^G(X)$. Conversely, given $\mathcal{
 induce an equivalence of categories. \sidenote{figure out why they are fully faithful}
 
 Note that a similar statement holds even when the quotient $X/G$ is not a variety. In that case we would need to talk
-about quotient stacks, which is beyond our current scope.
+about quotient schemes or quotient stacks, which is beyond our current scope.
 \end{remark}
 
-% TODO correspondence b/w equivariant bundles and equivariant sheaves
+The following result shows that equivariant sheaves do indeed generalize equivariant vector bundles.
 
-For $F\to X$ a $G$-equivariant vector bundle, there is a natural linear action of $G$ on the space of
-sections $\Gamma(X,F)$ taking $s\in\Gamma(X,F)$ to $gs\in\Gamma(X,F)$, given by
-\[(gs)(x) = g(s(g^{-1}x)).\]
+\begin{proposition}
+    The functor taking equivariant vector bundles on $X$ to their sheaves of sections
+    is an equivalence of categories between $\textsc{Bun}^G(X)$ and the full subcategory of
+    $\textsc{Mod}^G(\mathcal{O}_X)$ consisting of locally free equivariant $\mathcal{O}_X$-modules
+    of finite rank.
+\end{proposition}
+\begin{proof}
+    Do this.\sidenote{Chriss-Ginzburg p.233}
+\end{proof}
+
 We obtain the corresponding action in the setting of equivariant sheaves as follows. First
 note that\sidenote{extend this to cohomology}
 \begin{align*}
