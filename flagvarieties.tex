@@ -201,9 +201,9 @@ the language of equivariant vector bundles.
 \end{definition}
 
 \begin{proposition}
-\label{principalBbundle}
-Let $G$ be a reductive linear algebraic group, $B$ a Borel subgroup and $\pi : G \to G/B$ the quotient map. Then
-$\pi$ is locally trivial with fiber $B$.
+    \label{prop:principalBbundle}
+    Let $G$ be a reductive linear algebraic group, $B$ a Borel subgroup and $\pi : G \to G/B$ the quotient map. Then
+    $\pi$ is locally trivial with fiber $B$.
 \end{proposition}
 
 We prove this proposition in the following paragraphs. We first choose a cover of $G$ by the sets $g N^{-} B$, for 
@@ -234,7 +234,10 @@ the orbit under $B$ of $g_0 \cdot x \in G/B$, so by \sidenote{Reference Humphrey
 $G/B$. Therefore $Bg_0 B$ is open in $G$, and so is $N^- B$.
 \end{proof}
 
-We return to the proof of proposition \ref{principalBbundle}. Note that $\pi^{-1}(N^-B / B) = N^- B$; we prove
+We can now finish the proof.
+
+\begin{proof}[Proof of Proposition \ref{prop:principalBbundle}]
+Note that $\pi^{-1}(N^-B / B) = N^- B$; we prove
 that $N^- B \cong N^-B / B \times B$ by constructing an explicit isomorphism. Moreover, the isomorphism will
 commute with multiplication by $G$ on the left, which shows that $\pi^{-1}(gN^-B / B) \cong gN^-B / B \times B$
 for all $g$. The construction follows from the observation that each $n\in N^-$ is the unique element
@@ -261,7 +264,7 @@ N^-B \arrow{r}{\pi \times p_2} & N^-B/B \times B
 \]
 where $p_2(nb) = b$. Therefore $\phi$ is an isomorphism, which finishes the proof that $\pi$ is locally trivial. The
 fiber $nB$ above $nB/B$ is isomorphic to $B$ via multiplication by $n$.
-
+\end{proof}
 
 The vector bundles of primary interest to us (especially those used in the proof of the theorem of Borel-Weil-Bott)
 will be those equipped with $G$-actions compatible with the $G$-actions on their base spaces.
@@ -410,12 +413,13 @@ The following result shows that equivariant sheaves do indeed generalize equivar
 \end{proof}
 
 We obtain the corresponding action in the setting of equivariant sheaves as follows. First
-note that\sidenote{extend this to cohomology}
-\begin{align*}
-    \Gamma(G\times X,p_2^*\mathcal{F}) &= \Gamma(G\times X, p_2^{-1}\mathcal{F}\otimes_{p_2^{-1}\mathcal{O}_X}\mathcal{O}_{G\times X})\\
+note that
+\begin{align}
+    \Gamma(G\times X,p_2^*\mathcal{F}) &= \Gamma(G\times X, p_2^{-1}\mathcal{F}\otimes_{p_2^{-1}\mathcal{O}_X}\mathcal{O}_{G\times X})\nonumber\\
     %&\cong \Gamma\left(G\times X, p_2^{-1}\mathcal{F}\otimes_{p_2^{-1}\mathcal{O}_X}\left(\mathcal{O}_X\otimes_{\C_X}\mathcal{O}_G\right)\right)\\
     &\cong \Gamma(X,\mathcal{F}) \otimes_{\C}\C[G],
-\end{align*}
+    \label{eq:pullbacksheaf}
+\end{align}
 where $\C[G]=\mathcal{O}_G(G)$.\sidenote{Recall that $G$ is affine.} Now consider the isomorphisms
 $\varepsilon_i:G\times X\to G\times X$ for $i=1,2$ given by $(g,x)\mapsto (g,gx)$ and $(g,x)\mapsto(g,g^{-1}x)$, respectively.
 Clearly $\varepsilon_1=\varepsilon_2^{-1}$ and $p_2\circ\varepsilon_1=\sigma$. Hence we find that
@@ -437,7 +441,76 @@ for some $s_i\in\Gamma(X,\mathcal{F}), f_i\in\C[G]$, the $G$-action on $s$ takes
 where
 \[gs=\sum_if_i(g)s_i.\]
 In particular, this action is algebraic.\sidenote{what does this even mean? how to compare this
-to bundles? how do we extend this to cohomology?}
+to bundles?}
+
+The entire argument above can be repeated, replacing the functor $\Gamma(X,\cdot)$ with
+higher cohomologies $\HH^i(X,\cdot)$ and similarly for $\Gamma(G\times X,\cdot)$, given
+the following purely algebro-geometric proposition, extending Equation \ref{eq:pullbacksheaf}.
+
+\begin{lemma}
+    Let $p_2:G\times X\to X$ be projection onto the second factor and let $\mathcal{F}$ be an
+    $\mathcal{O}_X$-module. Then,
+    \begin{equation}
+        \HH^i(G\times X,p_2^*\mathcal{F}) \cong \HH^i(X,\mathcal{F})\otimes_\C\C[G]
+        \label{eq:pullbackcohomology}
+    \end{equation}
+\end{lemma}
+\begin{proof}
+    We use the language of cohomology as right derived functors of the global sections functor.
+    Suppose we are given an injective resolution $0\to\mathcal{F}\to\mathcal{I}_\bullet$
+    (with maps labelled $d^i$).
+    Since $p_2$ is a flat map of varieties, the pullback $p_2^*$ is exact, and hence
+    the pullback $0\to p_2^*\mathcal{F}\to p_2^*\mathcal{I}_\bullet$ to $G\times X$ is
+    an resolution of $p_2^*\mathcal{F}$. Moreover, each $p_2^*\mathcal{I}_i$ is an injective
+    $\mathcal{O}_X$-module -- consider the diagram
+    \begin{equation}
+        \begin{tikzcd}
+            0\ar{r} & \mathcal{A}\ar{r}\ar{rd} & \mathcal{B}\ar[dashed]{d}\\
+            & & p_2^*\mathcal{\mathcal{I}}_i
+        \end{tikzcd}
+        \label{eq:injectivepullback}
+    \end{equation}
+    of $\mathcal{O}_X$-modules, where the row is exact. It suffices to construct the dashed map such that the diagram commutes.
+    Taking the direct image $(p_2)_*$ of \ref{eq:injectivepullback}, we obtain, by the left-exactness
+    of the direct image,
+    \begin{equation}
+        \begin{tikzcd}
+            0\ar{r} & (p_2)_*\mathcal{A}\ar{r}\ar{rd} & (p_2)_*\mathcal{B}\\
+            & & \mathcal{\mathcal{I}}_i
+        \end{tikzcd}
+        \label{eq:injectivepullback2}
+    \end{equation}
+    where we have used the  natural isomorphisms given by the adjunction of $p_2^*$ and $(p_2)_*$.
+    Here, injectivity of $\mathcal{I}_i$ yields a map $(p_2)_*\mathcal{B}\to \mathcal{I}_i$
+    making \ref{eq:injectivepullback2} commute. Taking the pullback of this map and invoking
+    the adjunction again, we obtain $\mathcal{B}\to p_2^*\mathcal{I}_i$ making \ref{eq:injectivepullback}
+    commute. This proves that $p_2^*\mathcal{I}_i$ is injective.
+
+    The cohomology of $p_2^*\mathcal{F}$ is now computed directly from this pullback resolution.
+    Indeed, applying $\Gamma(G\times X,\cdot)$ yields
+    \begin{equation*}
+        \begin{tikzcd}
+            0\ar{r} & \Gamma(G\times X, p_2^*\mathcal{F})\ar[equal]{d}\ar{r}{\Gamma p_2^*f^0} & \Gamma(G\times X, p_2^*\mathcal{I}_1)\ar{r}{\Gamma p_2^*f^1}\ar[equal]{d} & \cdots\\
+            0\ar{r} & \Gamma(X, \mathcal{F})\otimes_\C\C[G]\ar{r}{\Gamma d^0\otimes 1} & \Gamma(X,\mathcal{I}_1)\otimes_\C\C[G]\ar{r}{\Gamma d^1\otimes 1} & \cdots
+        \end{tikzcd}
+    \end{equation*}
+    where the horizontal maps in the second row avoid the $\C[G]$ factor, being induced by maps
+    of $\mathcal{O}_X$-modules on $X$. Thus, if we write
+    \begin{equation*}
+        \begin{tikzcd}
+            0\ar{r} & \im\Gamma d^i\ar{r} & \ker\Gamma d^{i+1}\ar{r} & \HH^i(X,\mathcal{F})\ar{r} & 0
+        \end{tikzcd}
+    \end{equation*}
+    and tensor on the right by $\C[G]$, we obtain\sidenote{Any module over $\C$ is free and hence tensoring over $\C$ is exact.}
+    \begin{equation*}
+        \begin{tikzcd}
+            0\ar{r} & \im\Gamma d^i\otimes_\C\C[G]\ar{r} & \ker\Gamma d^{i+1}\otimes_\C\C[G]\ar{d}\\
+            && \HH^i(X,\mathcal{F})\otimes_\C\C[G]\ar{r} & 0
+        \end{tikzcd}
+    \end{equation*}
+    which yields the cohomology of the second row above. 
+    We conclude that $\HH^i(G\times X,p_2^*\mathcal{F})\cong \HH^i(X,\mathcal{F})\otimes_\C\C[G]$.
+\end{proof}
 
 
 \section{Borel--Weil--Bott}
