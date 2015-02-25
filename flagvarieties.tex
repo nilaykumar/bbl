@@ -476,8 +476,8 @@ G\arrow[swap]{dr}{\rho} & & G\times_B Q\arrow[dashed]{dl}{\gamma} \\
 $\gamma : G\times_B Q \to X$ has the structure of a $G$-equivariant vector bundle.
 \end{proposition}
 \begin{proof}
-$G \to X$ is a principal $B$-bundle, so around each $x \in X$ there is an open $V$ such that $\rho^{-1}(V) \cong
-V \times B$. \sidenote{figure out how this works in the algebraic case} If follows that:
+$G \to X$ is a principal $B$-bundle, so around each $gB/B \in X$ there is an open $V = gN^-B/B$ such that $\rho^{-1}(V) \cong
+V \times B$. \sidenote{See Proposition \ref{principalBbundle}} If follows that:
 \begin{align*}
 \pi^{-1} \big(\gamma^{-1}(V) \big) &= (\gamma \circ \pi)^{-1}(V) \\
 &= (\rho \circ p_1)^{-1}(V) \\
@@ -486,11 +486,17 @@ V \times B$. \sidenote{figure out how this works in the algebraic case} If follo
 &= V \times B \times Q
 \end{align*}
 But $\pi$ is surjective, so this implies $\gamma^{-1}(V) \cong (V \times B)\times_B Q \cong V \times Q$, which gives a local
-trivialization of $G\times_B Q$. Moreover, the isomorphism $\gamma^{-1}(V) \cong V\times Q$ is linear on the fiber of each
-$x \in V$, \sidenote{Write the fiber as $gB \times_B Q$ and show that the isomorphism is linear.}, which makes $G\times_B Q$
-a vector bundle over $X$.
-
-We define an action of $G$ on $G\times_B Q$ as follows. Let $p \in G\times_B Q$ and choose a representative $(g,q) \in \pi^{-1}
+trivialization of $G\times_B Q$. Moreover, in the above computation $\rho^{-1}(gB/B) \cong \{gB/B\} \times B$, which shows 
+that $\gamma^{-1}(gB/B) = gB \times_B Q$. This is isomorphic to $Q$ via
+\[	\psi [gb, q] = \sigma(b) q	\]
+The isomorphism is clearly linear, since
+\begin{align*}
+ \psi \big( [gb_1,q_1] + [gb_2, q_2] \big) &= \psi \big( [g, \sigma(b_1)q_1 + \sigma(b_2)q_2] \big) \\
+&= \sigma(b_1)q_1 + \sigma(b_2)q_2 \\
+&= \psi [gb_1, q_1] + \psi[gb_2,q_2]
+\end{align*}
+This makes $G\times_B Q$ a vector bundle over $X$. We define an action of $G$ on $G\times_B Q$ as follows. 
+Let $p \in G\times_B Q$ and choose a representative $(g,q) \in \pi^{-1}
 (p)$. Then let $h \cdot p = \pi (hg, q)$ for every $h \in G$. To see that the definition does not depend on the choice of
 representative, assume that $(g',q') \sim (g,q)$. Then clearly $(hg',q') \sim (hg,q)$, so $\pi(hg',q') = \pi(hg,q)$. Finally
 we prove that, equipped with this action, $G\times_B Q \to X$ is $G$-equivariant:
