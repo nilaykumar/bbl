@@ -550,7 +550,7 @@ $\gamma : G\times_B Q \to X$ has the structure of a $G$-equivariant vector bundl
 \end{proposition}
 \begin{proof}
 $G \to X$ is a principal $B$-bundle, so around each $gB/B \in X$ there is an open $V = gN^-B/B$ such that $\rho^{-1}(V) \cong
-V \times B$. \sidenote{See Proposition \ref{principalBbundle}} If follows that:
+V \times B$. \sidenote{See Proposition \ref{principalBbundle}} It follows that:
 \begin{align*}
 \pi^{-1} \big(\gamma^{-1}(V) \big) &= (\gamma \circ \pi)^{-1}(V) \\
 &= (\rho \circ p_1)^{-1}(V) \\
@@ -582,6 +582,56 @@ we prove that, equipped with this action, $G\times_B Q \to X$ is $G$-equivariant
 \end{align*}
 \end{proof}
 
+\begin{lemma}
+\label{charext}
+Every character $\sigma : T \to \C^{\times}$ extends uniquely to $B$. \sidenote{reference Man Shun John Ma}
+\end{lemma}
+\begin{proof}
+Given a character $\sigma$ of $T$, we can extend it to $B = TN$ by $\tilde \sigma(n) = 1$ for all $n\in N$; this
+is possible because $T\cap N = \{e\}$. Conversely, given a character $\tilde \sigma$ of $B$, we prove that
+it restricts to 1 on $N$. Consider the differential $d\tilde \sigma|_{\fr n} : \fr n \to \fr{gl}_1(\C)$. Using \sidenote{
+reference Borel or Humphreys}, it suffices to prove $d\tilde \sigma|_{\fr n} = 0$, as this implies $\tilde \sigma|_N = 1$.
+But recall that $\fr n = [\fr b, \fr b]$. Since $d\tilde \sigma$ is a Lie algebra homomorphism, $d \tilde \sigma (\fr n)
+\subset [\fr{gl}_1(\C), \fr{gl}_1(\C)] = 0$. This completes the proof.
+\end{proof}
+
+\begin{example}
+In the case $G = SL(2,\C)$, the integral weights are $\lambda_k = k \rho$, for $k \in \Z$. We show that $\mathcal{I}(\lambda_k) 
+\cong \mathcal{O}(-k)$, where the latter are Serre's
+twisted sheaves on $G/B \cong \PP^1$. Let $p: \A^2 - \{0\} \to \PP^1$ be the projection, and recall that sections 
+of Serre's twisted sheaves are regular functions on $\A^2$ which are homogenous of degree $k$ \sidenote{Regular functions 
+on $\A^2$ and $\A^2 - \{0\}$ are the same, due to the algebraic version of Hartogs' theorem.}:
+\[	\mathcal{O}(k)(U) = \{ h \in \mathcal{O}_{\A^2}\big(p^{-1}(U)\big) | h(ax, ay) = a^k h(x,y) \}	\]
+At the group level, Lemma \ref{charext} shows that the unique character of $B$ corresponding 
+to $\lambda_k$ is
+\[	\sigma_k : b = \left( \begin{array} {cc} x & y \\ 0 & x^{-1} \end{array} \right) \mapsto x^k \]
+Then the sheaf $\mathcal{I}(\lambda_k)$ is
+\[	\mathcal{I}(\lambda_k)(U) = \left\{ f \in \mathcal{O}_G\big(\rho^{-1}(U)\big) | f(gb^{-1}) = x^k f(g) \right\}	\]
+In particular, the functions $f$ are invariant under right multiplication by the unipotent subgroup $N$, so they descend
+to functions on $G/N$. Following the proof
+in \sidenote{reference Jantzen}, let $e_1 = [1, 0]^T$ be an element of the standard basis of $\A^2$. Under the standard
+action of $G$ on $\A^2$ by multiplication on the left, $N = \text{Stab}_{e_1}$, and the orbit of $e_1$ is $\A^2 - 0$. The
+orbit-stabilizer theorem then gives
+\begin{equation}
+\label{orbitstabN}
+G/N \overset{\sim}{\to} \A^2 - \{0\}
+\end{equation}
+Hence we obtain an isomorphism of coordinate rings
+\begin{equation}
+\label{invringN}
+\C[G/N] \cong \C[\A^2 - \{0\}] = \C[\A^2]
+\end{equation}
+Since the isomorphism in \ref{invringN} is obtained by pulling back coordinate functions along the isomorphism in
+\ref{orbitstabN}, a function $h \in \C[\A^2]$ is mapped to the function $f \in \C[G/N]$ which takes 
+$g \mapsto h(ge_1)$. Since
+elements $b \in B$ are upper diagonal, $b e_1 = x e_1$, so that $gb^{-1} \mapsto h(gb^{-1}e_1) = h(x^{-1} ge_1)$.
+We have obtained
+\begin{align*}
+\mathcal{I}(\lambda_k)(G/B) &\cong \left\{ h \in \C[\A^2] | h(x^{-1}g e_1) = x^k h(g e_1) \right\} \\
+&= \mathcal{O}(-k)(G/B)
+\end{align*}
+\sidenote{Figure out how to localize this}
+\end{example}
 
 
 
