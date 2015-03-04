@@ -534,12 +534,12 @@ this vector bundle is the following quotient of the product variety $G\times Q$:
 G\times_B Q = G\times Q / \big(g,q\big) \sim \big(gb^{-1} , \sigma(b) q\big)
 \end{equation}
 This equips $G\times_B Q$ with the quotient topology and the quotient structure sheaf. Let $\pi: G\times Q \to 
-G\times_B Q$ and $\rho : G \to X$ be the quotient maps. Then $\rho \circ p_1$ is constant on the fibers of $\pi$,
+G\times_B Q$ and $q : G \to X$ be the quotient maps. Then $q \circ p_1$ is constant on the fibers of $\pi$,
 so there exists a map $\gamma$ which makes the following diagram commute:
 \[
 \begin{tikzcd}
 \; & G \times Q\arrow[swap]{dl}{p_1}\arrow{dr}{\pi} & \\
-G\arrow[swap]{dr}{\rho} & & G\times_B Q\arrow[dashed]{dl}{\gamma} \\
+G\arrow[swap]{dr}{q} & & G\times_B Q\arrow[dashed]{dl}{\gamma} \\
  & X & 
 \end{tikzcd}
 \]
@@ -549,17 +549,17 @@ G\arrow[swap]{dr}{\rho} & & G\times_B Q\arrow[dashed]{dl}{\gamma} \\
 $\gamma : G\times_B Q \to X$ has the structure of a $G$-equivariant vector bundle.
 \end{proposition}
 \begin{proof}
-$G \to X$ is a principal $B$-bundle, so around each $gB/B \in X$ there is an open $V = gN^-B/B$ such that $\rho^{-1}(V) \cong
+$G \to X$ is a principal $B$-bundle, so around each $gB/B \in X$ there is an open $V = gN^-B/B$ such that $q^{-1}(V) \cong
 V \times B$. \sidenote{See Proposition \ref{principalBbundle}} It follows that:
 \begin{align*}
 \pi^{-1} \big(\gamma^{-1}(V) \big) &= (\gamma \circ \pi)^{-1}(V) \\
-&= (\rho \circ p_1)^{-1}(V) \\
-&= p_1^{-1} \big(\rho^{-1}(V) \big) \\
+&= (q \circ p_1)^{-1}(V) \\
+&= p_1^{-1} \big(q^{-1}(V) \big) \\
 &\cong p_1^{-1} (V \times B) \\
 &= V \times B \times Q
 \end{align*}
 But $\pi$ is surjective, so this implies $\gamma^{-1}(V) \cong (V \times B)\times_B Q \cong V \times Q$, which gives a local
-trivialization of $G\times_B Q$. Moreover, in the above computation $\rho^{-1}(gB/B) \cong \{gB/B\} \times B$, which shows 
+trivialization of $G\times_B Q$. Moreover, in the above computation $q^{-1}(gB/B) \cong \{gB/B\} \times B$, which shows 
 that $\gamma^{-1}(gB/B) = gB \times_B Q$. This is isomorphic to $Q$ via
 \[	\psi [gb, q] = \sigma(b) q	\]
 The isomorphism is clearly linear, since
@@ -575,9 +575,9 @@ representative, assume that $(g',q') \sim (g,q)$. Then clearly $(hg',q') \sim (h
 we prove that, equipped with this action, $G\times_B Q \to X$ is $G$-equivariant:
 \begin{align*}
 \gamma(h \cdot p) &= \gamma \circ \pi (hg, q) \\
-&= \rho(hg) \\
-&= h \cdot \rho(g) \\
-&= h \cdot (\rho \circ p_1)(g,q) \\
+&= q(hg) \\
+&= h \cdot q(g) \\
+&= h \cdot (q \circ p_1)(g,q) \\
 &= h \cdot \gamma(p)
 \end{align*}
 \end{proof}
@@ -606,31 +606,31 @@ At the group level, Lemma \ref{charext} shows that the unique character of $B$ c
 to $\lambda_k$ is
 \[	\sigma_k : b = \left( \begin{array} {cc} x & y \\ 0 & x^{-1} \end{array} \right) \mapsto x^k \]
 Then the sheaf $\mathcal{I}(\lambda_k)$ is
-\[	\mathcal{I}(\lambda_k)(U) = \left\{ f \in \mathcal{O}_G\big(\rho^{-1}(U)\big) | f(gb^{-1}) = x^k f(g) \right\}	\]
+\[	\mathcal{I}(\lambda_k)(U) = \left\{ f \in \mathcal{O}_G\big(q^{-1}(U)\big) | f(gb^{-1}) = x^k f(g) \right\}	\]
 In particular, the functions $f$ are invariant under right multiplication by the unipotent subgroup $N$, so they descend
-to functions on $G/N$. Following the proof
-in \sidenote{reference Jantzen}, let $e_1 = [1, 0]^T$ be an element of the standard basis of $\A^2$. Under the standard
+to functions on $G/N$. This gives a group homomorphism $\phi : \mathcal{I}(\lambda_k)(U) \to \mathcal{O}(-k)(U)$. We want to
+construct an inverse of $\phi$. Let $e_1 = [1, 0]^T$ be an element of the standard basis of $\A^2$. Under the standard
 action of $G$ on $\A^2$ by multiplication on the left, $N = \text{Stab}_{e_1}$, and the orbit of $e_1$ is $\A^2 - 0$. The
 orbit-stabilizer theorem then gives
-\begin{equation}
-\label{orbitstabN}
-G/N \overset{\sim}{\to} \A^2 - \{0\}
-\end{equation}
-Hence we obtain an isomorphism of coordinate rings
-\begin{equation}
-\label{invringN}
-\C[G/N] \cong \C[\A^2 - \{0\}] = \C[\A^2]
-\end{equation}
-Since the isomorphism in \ref{invringN} is obtained by pulling back coordinate functions along the isomorphism in
-\ref{orbitstabN}, a function $h \in \C[\A^2]$ is mapped to the function $f \in \C[G/N]$ which takes 
-$g \mapsto h(ge_1)$. Since
-elements $b \in B$ are upper diagonal, $b e_1 = x e_1$, so that $gb^{-1} \mapsto h(gb^{-1}e_1) = h(x^{-1} ge_1)$.
-We have obtained
 \begin{align*}
-\mathcal{I}(\lambda_k)(G/B) &\cong \left\{ h \in \C[\A^2] | h(x^{-1}g e_1) = x^k h(g e_1) \right\} \\
-&= \mathcal{O}(-k)(G/B)
+G/N &\overset{\sim}{\to} \A^2 - \{0\} \\
+[g] &\mapsto g \cdot e_1
 \end{align*}
-\sidenote{Figure out how to localize this}
+In particular, if $t\in T$, then $[t] \mapsto x e_1$, a scalar multiple of $e_1$. Hence we obtain:
+\[
+\begin{tikzcd}
+G\arrow{dr}{q}\arrow{d}{\pi} &  \\
+\A^2 - \{0\} \cong G/N \arrow{r}{p} & G/B \cong \PP^1
+\end{tikzcd}
+\]
+$\pi^*: \mathcal{O}(-k)(U) \to \mathcal{I}(\lambda_k)(U)$ gives the desired inverse of $\phi$. We conclude that
+$\phi$ is an isomorphism of groups for every $U$, and since these are clearly compatible with restriction maps,
+we obtain an isomorphism $\Phi$ of sheaves. Moreover, note that $\mathcal{O}(k)$ is a module over $\mathcal{O}(0)$, and
+identifying $\mathcal{O}(0) \cong \mathcal{I}(0)$ makes $\Phi$ into an isomorphism of $\mathcal{O}(0)$-modules.
+
+This argument is inspired from \sidenote{ref Jentzen}, where some irreducible representations of $GL(n,\C)$
+and $SL(n,\C)$ are realized as spaces of $k$-homogenous polynomials in $n$ variables. For $SL(2,\C)$, these happen
+to be all the irreducible finite-dimensional representations.
 \end{example}
 
 
